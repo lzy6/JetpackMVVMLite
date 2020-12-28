@@ -104,6 +104,7 @@ dependencies {
      * @param filedownloader 文件下载
      * @param shimmerlayout 骨骼加载
      * @param smartRefresh 上拉/下拉加载
+     * @param live-event-bus LiveEventBus
      */
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
