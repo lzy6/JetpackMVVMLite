@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="qmui_backgroundColor" format="color" />
+    <attr name="qmui_borderColor" format="color" />
+    <attr name="qmui_borderWidth" format="dimension" />
+    <attr name="qmui_linkColor" format="color" />
+    <attr name="qmui_orientation" format="enum">
+        <enum name="horizontal" value="0" />
+        <enum name="vertical" value="1" />
+    </attr>
+    <attr name="qmui_title" format="string" />
+
+    <declare-styleable name="QMUILayout">
+        <attr name="android:maxWidth" />
+        <attr name="android:maxHeight" />
+        <attr name="android:minWidth" />
+        <attr name="android:minHeight" />
+        <attr name="qmui_bottomDividerHeight" format="dimension" />
+        <attr name="qmui_bottomDividerColor" format="color|reference" />
+        <attr name="qmui_bottomDividerInsetLeft" format="dimension" />
+        <attr name="qmui_bottomDividerInsetRight" format="dimension" />
+        <attr name="qmui_topDividerHeight" format="dimension" />
+        <attr name="qmui_topDividerColor" format="color|reference" />
+        <attr name="qmui_topDividerInsetLeft" format="dimension" />
+        <attr name="qmui_topDividerInsetRight" format="dimension" />
+        <attr name="qmui_leftDividerWidth" format="dimension" />
+        <attr name="qmui_leftDividerColor" format="color|reference" />
+        <attr name="qmui_leftDividerInsetTop" format="dimension" />
+        <attr name="qmui_leftDividerInsetBottom" format="dimension" />
+        <attr name="qmui_rightDividerWidth" format="dimension" />
+        <attr name="qmui_rightDividerColor" format="color|reference" />
+        <attr name="qmui_rightDividerInsetTop" format="dimension" />
+        <attr name="qmui_rightDividerInsetBottom" format="dimension" />
+        <attr name="qmui_radius" />
+        <attr name="qmui_borderColor" />
+        <attr name="qmui_borderWidth" />
+        <attr name="qmui_outerNormalColor" format="color|reference" />
+        <attr name="qmui_hideRadiusSide" format="enum">
+            <enum name="none" value="0" />
+            <enum name="top" value="1" />
+            <enum name="right" value="2" />
+            <enum name="bottom" value="3" />
+            <enum name="left" value="4" />
+        </attr>
+        <attr name="qmui_showBorderOnlyBeforeL" format="boolean" />
+        <attr name="qmui_shadowElevation" format="dimension" />
+        <attr name="qmui_useThemeGeneralShadowElevation" format="boolean" />
+        <attr name="qmui_shadowAlpha" format="float" />
+        <attr name="qmui_outlineInsetTop" format="dimension" />
+        <attr name="qmui_outlineInsetLeft" format="dimension" />
+        <attr name="qmui_outlineInsetRight" format="dimension" />
+        <attr name="qmui_outlineInsetBottom" format="dimension" />
+        <attr name="qmui_outlineExcludePadding" format="boolean" />
+    </declare-styleable>
+
+    <attr name="qmui_general_shadow_alpha" format="float" />
+    <attr name="qmui_general_shadow_elevation" format="dimension" />
+    <attr name="qmui_alpha_pressed" format="float" />
+    <attr name="qmui_alpha_disabled" format="float" />
+
+    <!-- RoundWidget start -->
+
+    <!-- 圆角是否要自适应为 View 高度的一半 -->
+    <attr name="qmui_isRadiusAdjustBounds" format="boolean" />
+    <!-- 同时指定四个方向的圆角大小 -->
+    <attr name="qmui_radius" format="dimension" />
+    <!-- 指定左上方圆角的大小 -->
+    <attr name="qmui_radiusTopLeft" format="dimension" />
+    <!-- 指定右上方圆角的大小 -->
+    <attr name="qmui_radiusTopRight" format="dimension" />
+    <!-- 指定左下方圆角的大小 -->
+    <attr name="qmui_radiusBottomLeft" format="dimension" />
+    <!-- 指定右下方圆角的大小 -->
+    <attr name="qmui_radiusBottomRight" format="dimension" />
+
+    <attr name="QMUIButtonStyle" format="reference" />
+
+    <declare-styleable name="QMUIRoundButton">
+        <attr name="qmui_backgroundColor" />
+        <attr name="qmui_borderColor" />
+        <attr name="qmui_borderWidth" />
+        <attr name="qmui_isRadiusAdjustBounds" />
+        <attr name="qmui_radius" />
+        <attr name="qmui_radiusTopLeft" />
+        <attr name="qmui_radiusTopRight" />
+        <attr name="qmui_radiusBottomLeft" />
+        <attr name="qmui_radiusBottomRight" />
+    </declare-styleable>
+
+    <declare-styleable name="QMUIRoundFrameLayout">
+        <attr name="qmui_backgroundColor" />
+        <attr name="qmui_borderColor" />
+        <attr name="qmui_borderWidth" />
+        <attr name="qmui_isRadiusAdjustBounds" />
+        <attr name="qmui_radius" />
+        <attr name="qmui_radiusTopLeft" />
+        <attr name="qmui_radiusTopRight" />
+        <attr name="qmui_radiusBottomLeft" />
+        <attr name="qmui_radiusBottomRight" />
+    </declare-styleable>
+
+    <declare-styleable name="QMUIRoundLinearLayout">
+        <attr name="qmui_backgroundColor" />
+        <attr name="qmui_borderColor" />
+        <attr name="qmui_borderWidth" />
+        <attr name="qmui_isRadiusAdjustBounds" />
+        <attr name="qmui_radius" />
+        <attr name="qmui_radiusTopLeft" />
+        <attr name="qmui_radiusTopRight" />
+        <attr name="qmui_radiusBottomLeft" />
+        <attr name="qmui_radiusBottomRight" />
+    </declare-styleable>
+
+    <declare-styleable name="QMUIRoundRelativeLayout">
+        <attr name="qmui_backgroundColor" />
+        <attr name="qmui_borderColor" />
+        <attr name="qmui_borderWidth" />
+        <attr name="qmui_isRadiusAdjustBounds" />
+        <attr name="qmui_radius" />
+        <attr name="qmui_radiusTopLeft" />
+        <attr name="qmui_radiusTopRight" />
+        <attr name="qmui_radiusBottomLeft" />
+        <attr name="qmui_radiusBottomRight" />
+    </declare-styleable>
+
+    <!-- RoundWidget end -->
+
+    <!--**********************************************
+    *                  qmui bg_btn_blue_gray_border                      *
+    **********************************************-->
+    <attr name="qmui_round_btn_text_size" format="dimension" />
+    <attr name="qmui_round_btn_border_width" format="dimension" />
+
+    <attr name="qmui_skin_support_round_btn_bg_color" format="color" />
+    <attr name="qmui_skin_support_round_btn_border_color" format="color" />
+    <attr name="qmui_skin_support_round_btn_text_color" format="color" />
+
+    <declare-styleable name="QMUIPriorityLinearLayout_Layout">
+        <attr name="qmui_layout_priority" format="enum">
+            <enum name="disposable" value="1" />
+            <enum name="mini_content_protection" value="2" />
+            <enum name="incompressible" value="3" />
+        </attr>
+        <attr name="qmui_layout_miniContentProtectionSize" format="dimension" />
+    </declare-styleable>
+
+
+    <item name="qmui_window_inset_keyboard_area_consumer" type="id" />
+    <attr name="qmui_tab_sign_count_view_min_size_with_text" format="dimension" />
+    <attr name="qmui_tab_sign_count_view_min_size" format="dimension" />
+    <attr name="qmui_tab_sign_count_view" format="reference" />
+    <item name="qmui_view_can_not_cache_tag" type="id" />
+
+
+    <!--**************** QMUITabSegment ******************-->
+    <declare-styleable name="QMUITabSegment">
+        <attr name="qmui_tab_indicator_height" format="dimension" />
+        <attr name="qmui_tab_has_indicator" format="boolean" />
+        <attr name="qmui_tab_indicator_top" format="boolean" />
+        <attr name="qmui_tab_indicator_with_follow_content" format="boolean" />
+        <attr name="android:textSize" />
+        <attr name="qmui_tab_normal_text_size" format="dimension" />
+        <attr name="qmui_tab_selected_text_size" format="dimension" />
+        <attr name="qmui_tab_mode" format="enum">
+            <enum name="scrollable" value="0" />
+            <enum name="fixed" value="1" />
+        </attr>
+        <attr name="qmui_tab_space" format="dimension" />
+        <attr name="qmui_tab_icon_position" format="enum">
+            <enum name="left" value="0" />
+            <enum name="top" value="1" />
+            <enum name="right" value="2" />
+            <enum name="bottom" value="3" />
+        </attr>
+        <attr name="qmui_tab_select_no_animation" format="boolean" />
+    </declare-styleable>
+
+</resources>

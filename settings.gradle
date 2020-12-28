@@ -1,0 +1,3 @@
+include ':qmuilibrary'
+include ':app'
+rootProject.name = "JetPackMVVMLight"
