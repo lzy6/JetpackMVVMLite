@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start"
+    tools:context=".ui.activity.main.view.MainActivity">
 
-    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+    <include
+        layout="@layout/drawer_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/refresh"/>
+        android:layout_height="match_parent" />
 
-</LinearLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/view_nav"
+        android:layout_width="wrap_content"
+        android:background="@color/colorAccent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:itemTextColor="@color/gray_a9"
+        app:headerLayout="@layout/header_main"
+        app:menu="@menu/menu_main" />
+
+</androidx.drawerlayout.widget.DrawerLayout>

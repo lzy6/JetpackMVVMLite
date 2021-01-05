@@ -17,10 +17,12 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.example.jetpackmvvmlight.app.Constant
 import com.example.jetpackmvvmlight.app.utils.UtilToast
+import com.google.android.material.snackbar.Snackbar
 import com.liulishuo.filedownloader.BaseDownloadTask
 import com.liulishuo.filedownloader.FileDownloadListener
 import com.liulishuo.filedownloader.FileDownloader
 import com.tencent.mmkv.MMKV
+import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
 
 
@@ -29,6 +31,10 @@ import java.io.File
  */
 fun toast(toast: String) {
     UtilToast.showToast(APP.instance, toast)
+}
+
+fun Context.snackBarToast(view: View, strId: Int) {
+    Snackbar.make(view, getString(strId), Snackbar.LENGTH_SHORT).show()
 }
 
 /**
@@ -247,12 +253,4 @@ fun fileDownloader(
 fun isLogin(): Boolean {
     val token = mmkv().decodeString(Constant.TOKEN)
     return !token.isNullorEmpty()
-}
-
-fun noLoginStartLogin(context: Context): Boolean {
-//    if (!isLogin()) {
-//        startActivity(context, LoginActivity::class.java)
-//        return true
-//    }
-    return false
 }

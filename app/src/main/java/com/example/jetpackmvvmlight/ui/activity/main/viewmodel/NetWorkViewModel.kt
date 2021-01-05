@@ -8,7 +8,7 @@ import com.example.jetpackmvvmlight.entity.PageUser
 import com.example.jetpackmvvmlight.entity.User
 import java.net.SocketTimeoutException
 
-class MainViewModel : BaseViewModel() {
+class NetWorkViewModel : BaseViewModel() {
 
     val pageEntityLiveData = StateLiveData<Page<PageUser>>()
     val singEntityLiveData = StateLiveData<User>()

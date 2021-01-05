@@ -24,6 +24,7 @@ import com.example.jetpackmvvmlight.app.utils.HtmlUtil
 import com.example.jetpackmvvmlight.entity.Page
 import com.fondesa.recyclerviewdivider.dividerBuilder
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.snackbar.Snackbar
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

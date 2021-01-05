@@ -1,89 +1,98 @@
 package com.example.jetpackmvvmlight.ui.activity.main.view
 
-import com.example.jetpackmvvmlight.*
-import com.example.jetpackmvvmlight.app.Constant
+import android.content.Intent
+import android.view.Gravity
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
+import androidx.core.view.GravityCompat
+import com.example.jetpackmvvmlight.R
 import com.example.jetpackmvvmlight.app.base.BaseActivity
-import com.example.jetpackmvvmlight.entity.PageUser
-import com.example.jetpackmvvmlight.entity.User
-import com.example.jetpackmvvmlight.ui.activity.main.viewmodel.MainViewModel
-import com.example.jetpackmvvmlight.ui.adapter.UserAdapter
-import com.scwang.smart.refresh.layout.api.RefreshLayout
-import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
+import com.example.jetpackmvvmlight.data
+import com.example.jetpackmvvmlight.onClick
+import com.example.jetpackmvvmlight.snackBarToast
+import com.example.jetpackmvvmlight.ui.adapter.MainAdapter
+import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.drawer_main.*
+import kotlinx.android.synthetic.main.item_main.view.*
 
-class MainActivity : BaseActivity(R.layout.activity_main), OnRefreshLoadMoreListener {
+class MainActivity : BaseActivity(R.layout.activity_main),
+    NavigationView.OnNavigationItemSelectedListener {
 
-    private val mModel by lazy { viewModels<MainViewModel>(this) }
-    private val mAdapter by lazy { UserAdapter() }
-    private var page = 1
+    private val mAdapter by lazy { MainAdapter() }
 
     override fun initData() {
         init()
+        initClick()
+        initRv()
         initListener()
-        request()
-    }
-
-    private fun initListener() {
-        refresh.setOnRefreshLoadMoreListener(this)
     }
 
     /**
-     * 数据回传
+     * 初始化点击事件
      */
-    private fun request() {
-        mModel.run {
-            pageEntityLiveData.observeInActivity(this@MainActivity) { setData(it.list) }
-            pageEntityLiveData.state.observeInActivity(this@MainActivity) { state ->
-                apiState(state,
-                    complete = { refresh.complete() },
-                    stateLayout = { mAdapter.setEmptyView(it) },
-                    hasMore = { refresh.finishMore(it) }
-                )
-            }
-
-            singEntityLiveData.observeInActivity(this@MainActivity) {
-
-            }
-            singEntityLiveData.state.observeInActivity(this@MainActivity) {
-                apiState(
-                    it,
-                    before = { showLoading() },
-                    complete = { dismissLoading() })
-            }
-
-            mayNullLiveData.observeInActivity(this@MainActivity) {
-
-            }
-            mayNullLiveData.state.observeInActivity(this@MainActivity) {
-                apiState(
-                    it,
-                    before = { showLoading() },
-                    complete = { dismissLoading() })
-            }
-
-            //初始调用接口
-            singEntity()
-            mayNull()
+    private fun initClick() {
+        fab.onClick {
+            snackBarToast(fab, R.string.issue)
         }
     }
 
     /**
-     * 装填数据
+     * 初始化listener
      */
-    private fun setData(data: ArrayList<PageUser>) {
-        mAdapter.setPageData(page, data)
-        page++
+    private fun initListener() {
+        mAdapter.setOnItemClickListener { adapter, view, position ->
+            val intent = Intent(this, RvDetailActivity::class.java)
+            val activityOptions =
+                ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    this,
+                    Pair<View, String>(view.iv_img, RvDetailActivity.IMAGE),
+                    Pair<View, String>(view.tv_title, RvDetailActivity.TITLE)
+                )
+
+            ActivityCompat.startActivity(
+                this,
+                intent,
+                activityOptions.toBundle()
+            )
+        }
     }
 
+    /**
+     * 初始化recyclerview
+     */
+    private fun initRv() {
+        rv_list.adapter = mAdapter
+        mAdapter.setNewInstance(data())
+    }
+
+    /**
+     * 初始化toolbar
+     */
     private fun init() {
-        initNoViewStatusBar(true)
+        setSupportActionBar(toolbar)
+        ActionBarDrawerToggle(
+            this, drawer_layout, toolbar, R.string.drawer_open, R.string.drawer_close
+        ).run {
+            drawer_layout.addDrawerListener(this)
+            syncState()
+        }
+
+        view_nav.setNavigationItemSelectedListener(this)
+        view_nav.itemIconTintList = null
     }
 
-    override fun onLoadMore(refreshLayout: RefreshLayout) {
-        mModel.pageUser(page)
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.nav_announcement -> startActivity(AnnouncementActivity::class.java)
+        }
+        drawer_layout.closeDrawer(GravityCompat.START)
+        return true
     }
 
-    override fun onRefresh(refreshLayout: RefreshLayout) {
-        mModel.pageUser(page)
-    }
 }
