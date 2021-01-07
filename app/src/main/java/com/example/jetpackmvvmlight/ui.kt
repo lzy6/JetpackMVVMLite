@@ -2,12 +2,14 @@ package com.example.jetpackmvvmlight
 
 import android.app.Activity
 import android.content.Context
+import android.graphics.Color
 import android.graphics.Paint
 import android.os.Build
-import android.text.Editable
-import android.text.TextWatcher
+import android.text.*
 import android.text.method.HideReturnsTransformationMethod
+import android.text.method.LinkMovementMethod
 import android.text.method.PasswordTransformationMethod
+import android.text.style.ClickableSpan
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -316,6 +318,36 @@ fun BottomSheetDialog.initBottomSheetDialog(context: Context, layout: Int): View
     )
     show()
     return view
+}
+
+fun TextView.protocol(content: String, click: (index: Int) -> Unit) {
+    val style = SpannableStringBuilder(content)
+    var index = 0
+    val list = ArrayList<Int>()
+    while (content.indexOf("《", index) != -1) {
+        val atIndex = content.indexOf("《", index)
+        val sIndex = content.indexOf("》", atIndex)
+
+        index = sIndex
+        if (sIndex < atIndex) { //格式不符合
+            continue
+        }
+        list.add(atIndex)
+        val clickableSpan = object : ClickableSpan() {
+            override fun onClick(p0: View) {
+                click.invoke(list.indexOf(atIndex))
+            }
+
+            override fun updateDrawState(ds: TextPaint) {
+                super.updateDrawState(ds)
+                ds.isUnderlineText = false
+            }
+        }
+        style.setSpan(clickableSpan, atIndex, sIndex + 1, Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
+    }
+    movementMethod = LinkMovementMethod.getInstance()
+    highlightColor = Color.parseColor("#00000000");
+    text = style
 }
 
 
