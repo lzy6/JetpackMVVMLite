@@ -1,9 +1,6 @@
 package com.example.jetpackmvvmlight.app.service
 
-import com.example.jetpackmvvmlight.entity.BaseResponse
-import com.example.jetpackmvvmlight.entity.Page
-import com.example.jetpackmvvmlight.entity.PageUser
-import com.example.jetpackmvvmlight.entity.User
+import com.example.jetpackmvvmlight.entity.*
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
@@ -28,5 +25,12 @@ interface CommonService {
     @FormUrlEncoded
     @POST(".../pageEntity")
     suspend fun pageEntity(@Field("pageNum") pageNum: Int): BaseResponse<Page<PageUser>>
+
+    /**
+     * 缓存列表
+     */
+    @FormUrlEncoded
+    @POST(".../pageEntity")
+    suspend fun cacheEntity(): BaseResponse<ArrayList<CacheEntity>>
 
 }

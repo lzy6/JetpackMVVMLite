@@ -9,6 +9,7 @@ import com.example.jetpackmvvmlight.entity.Page
 import com.example.jetpackmvvmlight.errorToast
 import com.lyl.chaoji.app.ApiException
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 open class BaseViewModel : ViewModel() {
@@ -102,6 +103,54 @@ open class BaseViewModel : ViewModel() {
             liveData.setComplete(Constant.COMPLETE)
         }
 
+    /**
+     * 缓存数据
+     */
+    fun <T> launchUIPageCache(
+        before: (() -> Unit)? = null,
+        cache: (suspend CoroutineScope.() -> ArrayList<T>)? = null,
+        response: suspend CoroutineScope.() -> ArrayList<T>,
+        error: ((e: Exception, code: Int) -> Unit)? = null,
+        complete: (() -> Unit)? = null,
+        retry: ((e: Exception, code: Int) -> Unit)? = null,
+        liveData: StateLiveData<ArrayList<T>>
+    ) {
+
+        //如果缓存数据比网络数据慢，则不加载缓存数据
+        var isRequestSuccess = false
+
+        viewModelScope.launch {
+            cache?.let {
+                async {
+                    it().apply {
+                        if (!isRequestSuccess) {
+                            liveData.value = this
+                        }
+                    }
+                }
+            }
+
+            try {
+                before?.invoke()
+                liveData.value = response()
+                isRequestSuccess = true
+                CacheManager.getInstance().saveCache("list", liveData.value)
+            } catch (e: Exception) {
+                errorToast(e)
+                if (e is ApiException) {
+                    error?.invoke(e, apiExceptionCode(e))
+                    retry?.invoke(e, apiExceptionCode(e))
+                    liveData.setError(Constant.ERROR, e.code)
+                } else {
+                    error?.invoke(e, -1)
+                    retry?.invoke(e, -1)
+                }
+            }
+        }.invokeOnCompletion {
+            complete?.invoke()
+            liveData.setComplete(Constant.COMPLETE)
+        }
+    }
 
 }
 

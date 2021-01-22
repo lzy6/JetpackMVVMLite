@@ -105,6 +105,7 @@ dependencies {
      * @param smartRefresh 上拉/下拉加载
      * @param live-event-bus LiveEventBus
      * @param circleimageview 圆形图片
+     * @param disklrucache 磁盘缓存
      */
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
@@ -121,6 +122,7 @@ dependencies {
     implementation 'com.scwang.smart:refresh-header-classics:2.0.1'
     implementation 'com.scwang.smart:refresh-footer-classics:2.0.1'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'com.jakewharton:disklrucache:2.0.2'
 
     /**
      * 引入model

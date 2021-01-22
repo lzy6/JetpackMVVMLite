@@ -18,4 +18,9 @@ object Constant{
      * 储存信息/习惯
      */
     const val TOKEN = "token"//token
+
+    /**
+     * 缓存key
+     */
+    const val CACHE="cache"
 }

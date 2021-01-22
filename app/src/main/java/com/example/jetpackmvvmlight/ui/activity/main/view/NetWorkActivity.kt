@@ -9,7 +9,7 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import kotlinx.android.synthetic.main.activity_network.*
 
-class NetWorkActivity :BaseActivity(R.layout.activity_network), OnRefreshLoadMoreListener {
+class NetWorkActivity : BaseActivity(R.layout.activity_network), OnRefreshLoadMoreListener {
     private val mModel by lazy { viewModels<NetWorkViewModel>(this) }
     private val mAdapter by lazy { UserAdapter() }
     private var page = 1
@@ -30,6 +30,9 @@ class NetWorkActivity :BaseActivity(R.layout.activity_network), OnRefreshLoadMor
      */
     private fun request() {
         mModel.run {
+            /**
+             * 分页回调
+             */
             pageEntityLiveData.observeInActivity(this@NetWorkActivity) { setData(it.list) }
             pageEntityLiveData.state.observeInActivity(this@NetWorkActivity) { state ->
                 apiState(state,
@@ -39,6 +42,9 @@ class NetWorkActivity :BaseActivity(R.layout.activity_network), OnRefreshLoadMor
                 )
             }
 
+            /**
+             * 单个实体回调
+             */
             singEntityLiveData.observeInActivity(this@NetWorkActivity) {
 
             }
@@ -49,6 +55,9 @@ class NetWorkActivity :BaseActivity(R.layout.activity_network), OnRefreshLoadMor
                     complete = { dismissLoading() })
             }
 
+            /**
+             * 可以为null时回调
+             */
             mayNullLiveData.observeInActivity(this@NetWorkActivity) {
 
             }
@@ -59,9 +68,23 @@ class NetWorkActivity :BaseActivity(R.layout.activity_network), OnRefreshLoadMor
                     complete = { dismissLoading() })
             }
 
+            /**
+             * 缓存方式回调
+             */
+            cacheEntityLiveData.observeInActivity(this@NetWorkActivity) {
+                //这里会执行两次回调数据，缓存数据+网络数据
+            }
+            cacheEntityLiveData.state.observeInActivity(this@NetWorkActivity) {
+                apiState(
+                    it,
+                    before = { showLoading() },
+                    complete = { dismissLoading() })
+            }
+
             //初始调用接口
             singEntity()
             mayNull()
+            cacheData()
         }
     }
 
