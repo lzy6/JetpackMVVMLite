@@ -32,25 +32,27 @@ open class BaseViewModel : ViewModel() {
     fun <T> launchUI(
         before: (() -> Unit)? = null,
         response: suspend CoroutineScope.() -> T,
-        error: ((e: Exception, code: Int) -> Unit)? = null,
+        error: ((e: Throwable, code: Int) -> Unit)? = null,
         complete: (() -> Unit)? = null,
-        retry: ((e: Exception, code: Int) -> Unit)? = null,
+        retry: ((e: Throwable, code: Int) -> Unit)? = null,
         liveData: StateLiveData<T>
     ) =
         viewModelScope.launch {
-            try {
-                before?.invoke()
-                liveData.setBefore(Constant.BEFORE)
-                liveData.value = response()
-            } catch (e: Exception) {
-                errorToast(e)
-                if (e is ApiException) {
-                    error?.invoke(e, apiExceptionCode(e))
-                    retry?.invoke(e, apiExceptionCode(e))
-                    liveData.setError(Constant.ERROR, e.code)
+            before?.invoke()
+            liveData.setBefore(Constant.BEFORE)
+            runCatching {
+                response()
+            }.onSuccess {
+                liveData.value = it
+            }.onFailure {
+                errorToast(it)
+                if (it is ApiException) {
+                    error?.invoke(it, apiExceptionCode(it))
+                    retry?.invoke(it, apiExceptionCode(it))
+                    liveData.setError(Constant.ERROR, it.code)
                 } else {
-                    error?.invoke(e, -1)
-                    retry?.invoke(e, -1)
+                    error?.invoke(it, -1)
+                    retry?.invoke(it, -1)
                 }
             }
         }.invokeOnCompletion {
@@ -70,32 +72,34 @@ open class BaseViewModel : ViewModel() {
         page: Int,
         before: (() -> Unit)? = null,
         response: suspend CoroutineScope.() -> Page<T>,
-        error: ((e: Exception, code: Int) -> Unit)? = null,
+        error: ((e: Throwable, code: Int) -> Unit)? = null,
         complete: (() -> Unit)? = null,
-        retry: ((e: Exception, code: Int) -> Unit)? = null,
+        retry: ((e: Throwable, code: Int) -> Unit)? = null,
         liveData: StateLiveData<Page<T>>
     ) =
         viewModelScope.launch {
-            try {
-                before?.invoke()
-                liveData.setBefore(Constant.BEFORE)
-                liveData.value = response()
-                if (page == 1 && liveData.value!!.total < 1) {
+            before?.invoke()
+            liveData.setBefore(Constant.BEFORE)
+            runCatching {
+                response()
+            }.onSuccess {
+                liveData.value = it
+                if (page == 1 && it.total < 1) {
                     liveData.setStateLayout(
                         Constant.STATE_LAYOUT,
                         Constant.VIEW_EMPTY
                     )
                 }
-                liveData.setHasMore(Constant.HAS_MORE, liveData.value!!)
-            } catch (e: Exception) {
-                errorToast(e)
-                if (e is ApiException) {
-                    error?.invoke(e, apiExceptionCode(e))
-                    retry?.invoke(e, apiExceptionCode(e))
-                    liveData.setError(Constant.ERROR, e.code)
+                liveData.setHasMore(Constant.HAS_MORE, it)
+            }.onFailure {
+                errorToast(it)
+                if (it is ApiException) {
+                    error?.invoke(it, apiExceptionCode(it))
+                    retry?.invoke(it, apiExceptionCode(it))
+                    liveData.setError(Constant.ERROR, it.code)
                 } else {
-                    error?.invoke(e, -1)
-                    retry?.invoke(e, -1)
+                    error?.invoke(it, -1)
+                    retry?.invoke(it, -1)
                 }
             }
         }.invokeOnCompletion {
@@ -104,18 +108,23 @@ open class BaseViewModel : ViewModel() {
         }
 
     /**
-     * 缓存数据
+     * 网络请求(列表)
+     * @param before 请求之前
+     * @param response 请求结果
+     * @param error 错误结果
+     * @param complete 接口请求后(成功/失败)执行
+     * @param retry 错误重试，设置最大次数，可自定义设置条件或无条件
+     * @param cache 读取缓存
      */
     fun <T> launchUIPageCache(
         before: (() -> Unit)? = null,
         cache: (suspend CoroutineScope.() -> ArrayList<T>)? = null,
         response: suspend CoroutineScope.() -> ArrayList<T>,
-        error: ((e: Exception, code: Int) -> Unit)? = null,
+        error: ((e: Throwable, code: Int) -> Unit)? = null,
         complete: (() -> Unit)? = null,
-        retry: ((e: Exception, code: Int) -> Unit)? = null,
+        retry: ((e: Throwable, code: Int) -> Unit)? = null,
         liveData: StateLiveData<ArrayList<T>>
     ) {
-
         //如果缓存数据比网络数据慢，则不加载缓存数据
         var isRequestSuccess = false
 
@@ -130,20 +139,22 @@ open class BaseViewModel : ViewModel() {
                 }
             }
 
-            try {
+            runCatching {
+                response()
+            }.onSuccess {
                 before?.invoke()
-                liveData.value = response()
+                liveData.value = it
                 isRequestSuccess = true
-                CacheManager.getInstance().saveCache("list", liveData.value)
-            } catch (e: Exception) {
-                errorToast(e)
-                if (e is ApiException) {
-                    error?.invoke(e, apiExceptionCode(e))
-                    retry?.invoke(e, apiExceptionCode(e))
-                    liveData.setError(Constant.ERROR, e.code)
+                CacheManager.getInstance().saveCache(Constant.CACHE, it)
+            }.onFailure {
+                errorToast(it)
+                if (it is ApiException) {
+                    error?.invoke(it, apiExceptionCode(it))
+                    retry?.invoke(it, apiExceptionCode(it))
+                    liveData.setError(Constant.ERROR, it.code)
                 } else {
-                    error?.invoke(e, -1)
-                    retry?.invoke(e, -1)
+                    error?.invoke(it, -1)
+                    retry?.invoke(it, -1)
                 }
             }
         }.invokeOnCompletion {

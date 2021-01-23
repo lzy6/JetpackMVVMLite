@@ -40,7 +40,7 @@ fun apiState(
     }
 }
 
-fun errorToast(t: Exception) {
+fun errorToast(t: Throwable) {
     val msg: String? = if (t is UnknownHostException || t is ConnectException) {
         "网络不可用"
     } else if (t is SocketTimeoutException) {
