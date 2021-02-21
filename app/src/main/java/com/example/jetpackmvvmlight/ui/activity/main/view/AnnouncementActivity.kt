@@ -1,7 +1,7 @@
 package com.example.jetpackmvvmlight.ui.activity.main.view
 
+import com.example.commonlib.base.BaseActivity
 import com.example.jetpackmvvmlight.R
-import com.example.jetpackmvvmlight.app.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_announcement.*
 
 class AnnouncementActivity : BaseActivity(R.layout.activity_announcement) {

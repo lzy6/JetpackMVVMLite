@@ -1,17 +1,16 @@
 package com.example.jetpackmvvmlight.ui.activity.main.viewmodel
 
-import com.example.jetpackmvvmlight.app.Constant
-import com.example.jetpackmvvmlight.app.base.BaseViewModel
-import com.example.jetpackmvvmlight.app.base.CacheManager
-import com.example.jetpackmvvmlight.app.base.StateLiveData
-import com.example.jetpackmvvmlight.app.utils.RetryUtil
+import com.example.commonlib.app.Constant
+import com.example.commonlib.base.BaseViewModel
+import com.example.commonlib.base.CacheManager
+import com.example.commonlib.base.StateLiveData
+import com.example.commonlib.entity.Page
+import com.example.jetpackmvvmlight.app.base.BaseAPPViewModel
 import com.example.jetpackmvvmlight.entity.CacheEntity
-import com.example.jetpackmvvmlight.entity.Page
 import com.example.jetpackmvvmlight.entity.PageUser
 import com.example.jetpackmvvmlight.entity.User
-import java.net.SocketTimeoutException
 
-class NetWorkViewModel : BaseViewModel() {
+class NetWorkViewModel : BaseAPPViewModel() {
 
     val pageEntityLiveData = StateLiveData<Page<PageUser>>()
     val singEntityLiveData = StateLiveData<User>()

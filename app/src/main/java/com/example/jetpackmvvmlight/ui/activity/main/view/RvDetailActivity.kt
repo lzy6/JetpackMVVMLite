@@ -1,8 +1,8 @@
 package com.example.jetpackmvvmlight.ui.activity.main.view
 
 import androidx.core.view.ViewCompat
+import com.example.commonlib.base.BaseActivity
 import com.example.jetpackmvvmlight.R
-import com.example.jetpackmvvmlight.app.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_rv_detail.*
 
 class RvDetailActivity : BaseActivity(R.layout.activity_rv_detail) {

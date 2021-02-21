@@ -1,7 +1,8 @@
 package com.example.jetpackmvvmlight.ui.activity.main.view
 
-import com.example.jetpackmvvmlight.*
-import com.example.jetpackmvvmlight.app.base.BaseActivity
+import com.example.commonlib.*
+import com.example.commonlib.base.BaseActivity
+import com.example.jetpackmvvmlight.R
 import com.example.jetpackmvvmlight.entity.PageUser
 import com.example.jetpackmvvmlight.ui.activity.main.viewmodel.NetWorkViewModel
 import com.example.jetpackmvvmlight.ui.adapter.UserAdapter

@@ -1,8 +1,6 @@
 package com.example.jetpackmvvmlight.ui.activity.main.view
 
 import android.content.Intent
-import android.view.Gravity
-import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -10,11 +8,13 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import androidx.core.view.GravityCompat
+import com.alibaba.android.arouter.launcher.ARouter
+import com.example.commonlib.app.RoutePath
+import com.example.commonlib.base.BaseActivity
+import com.example.commonlib.data
+import com.example.commonlib.onClick
+import com.example.commonlib.snackBarToast
 import com.example.jetpackmvvmlight.R
-import com.example.jetpackmvvmlight.app.base.BaseActivity
-import com.example.jetpackmvvmlight.data
-import com.example.jetpackmvvmlight.onClick
-import com.example.jetpackmvvmlight.snackBarToast
 import com.example.jetpackmvvmlight.ui.adapter.MainAdapter
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -90,6 +90,8 @@ class MainActivity : BaseActivity(R.layout.activity_main),
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_announcement -> startActivity(AnnouncementActivity::class.java)
+            R.id.nav_settings -> ARouter.getInstance().build(RoutePath.SettingActivity)
+                .navigation()
         }
         drawer_layout.closeDrawer(GravityCompat.START)
         return true

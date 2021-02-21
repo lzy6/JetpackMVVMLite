@@ -1,9 +1,11 @@
-plugins {
-    id 'com.android.application'
-    id 'kotlin-android'
-    id 'kotlin-android-extensions'
-    id 'kotlin-kapt'
+if (isSettingModule.toBoolean()) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
 }
+apply plugin:'kotlin-android'
+apply plugin:'kotlin-android-extensions'
+apply plugin:'kotlin-kapt'
 
 kapt {
     arguments {
@@ -11,29 +13,21 @@ kapt {
     }
 }
 
-def addFieldsAndPlaceholders = { flavor, items ->
-    for (def item : items) {
-        flavor.buildConfigField "String", item.key, '"' + item.value + '"'
-    }
-    flavor.addManifestPlaceholders(items)
-}
-
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "com.example.jetpackmvvmlight"
+        if (isSettingModule.toBoolean()) {
+            applicationId ''
+        }
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-        addFieldsAndPlaceholders(it, [
-                "BASE_URL": "http://your.environment",
-        ])
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -46,24 +40,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
 }
 
 dependencies {
-
-    /**
-     * 引入model
-     * @param qmuilibrary QMUI-UI
-     */
-    implementation project(':qmui')
-
+    implementation project(':commonLib')
     implementation 'com.alibaba:arouter-api:1.4.1'
     kapt 'com.alibaba:arouter-compiler:1.2.2'
-
-    implementation project(':commonLib')
-    if (!isSettingModule.toBoolean()) {
-        implementation project(':settingLib')
-    }
 }

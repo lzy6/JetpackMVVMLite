@@ -1,3 +1,5 @@
-include ':qmuilibrary'
+include ':commonLib'
+include ':settingLib'
+include ':qmui'
 include ':app'
 rootProject.name = "JetPackMVVMLight"
