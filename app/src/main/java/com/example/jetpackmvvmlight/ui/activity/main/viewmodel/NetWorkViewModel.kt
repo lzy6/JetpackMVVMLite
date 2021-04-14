@@ -21,7 +21,7 @@ class NetWorkViewModel : BaseAPPViewModel() {
      * 单个实体调用
      */
     fun singEntity() = launchUI(
-        response = { mApi.singEntity().data!! },
+        response = { api.singEntity().data!! },
         liveData = singEntityLiveData
     )
 
@@ -29,7 +29,7 @@ class NetWorkViewModel : BaseAPPViewModel() {
      * 可以为null时调用
      */
     fun mayNull() = launchUI(
-        response = { mApi.mayNull().data },
+        response = { api.mayNull().data },
         liveData = mayNullLiveData
     )
 
@@ -38,7 +38,7 @@ class NetWorkViewModel : BaseAPPViewModel() {
      */
     fun pageUser(pageNum: Int) = launchUIPage(
         pageNum,
-        response = { mApi.pageEntity(pageNum).data!! },
+        response = { api.pageEntity(pageNum).data!! },
         liveData = pageEntityLiveData
     )
 
@@ -52,7 +52,7 @@ class NetWorkViewModel : BaseAPPViewModel() {
                 CacheEntity::class.java
             )
         },
-        response = { mApi.cacheEntity().data!! },
+        response = { api.cacheEntity().data!! },
         liveData = cacheEntityLiveData
     )
 }

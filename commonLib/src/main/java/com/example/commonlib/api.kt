@@ -82,6 +82,3 @@ fun apiExceptionCode(apiException: ApiException): Int {
     }
     return apiException.code
 }
-
-inline fun <reified T : BaseViewModel> viewModels(activity: FragmentActivity): T =
-    ViewModelProvider(activity).get(T::class.java)

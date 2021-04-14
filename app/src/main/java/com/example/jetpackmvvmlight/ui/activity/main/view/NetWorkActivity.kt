@@ -1,5 +1,6 @@
 package com.example.jetpackmvvmlight.ui.activity.main.view
 
+import androidx.activity.viewModels
 import com.example.commonlib.*
 import com.example.commonlib.base.BaseActivity
 import com.example.jetpackmvvmlight.R
@@ -11,10 +12,9 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import kotlinx.android.synthetic.main.activity_network.*
 
 class NetWorkActivity : BaseActivity(R.layout.activity_network), OnRefreshLoadMoreListener {
-    private val mModel by lazy { viewModels<NetWorkViewModel>(this) }
-    private val mAdapter by lazy { UserAdapter() }
+    private val viewModel by viewModels<NetWorkViewModel>()
+    private val adapter by lazy { UserAdapter() }
     private var page = 1
-
 
     override fun initData() {
         init()
@@ -30,7 +30,7 @@ class NetWorkActivity : BaseActivity(R.layout.activity_network), OnRefreshLoadMo
      * 数据回传
      */
     private fun request() {
-        mModel.run {
+        viewModel.run {
             /**
              * 分页回调
              */
@@ -38,7 +38,7 @@ class NetWorkActivity : BaseActivity(R.layout.activity_network), OnRefreshLoadMo
             pageEntityLiveData.state.observeInActivity(this@NetWorkActivity) { state ->
                 apiState(state,
                     complete = { refresh.complete() },
-                    stateLayout = { mAdapter.setEmptyView(it) },
+                    stateLayout = { adapter.setEmptyView(it) },
                     hasMore = { refresh.finishMore(it) }
                 )
             }
@@ -93,7 +93,7 @@ class NetWorkActivity : BaseActivity(R.layout.activity_network), OnRefreshLoadMo
      * 装填数据
      */
     private fun setData(data: ArrayList<PageUser>) {
-        mAdapter.setPageData(page, data)
+        adapter.setPageData(page, data)
         page++
     }
 
@@ -102,11 +102,11 @@ class NetWorkActivity : BaseActivity(R.layout.activity_network), OnRefreshLoadMo
     }
 
     override fun onLoadMore(refreshLayout: RefreshLayout) {
-        mModel.pageUser(page)
+        viewModel.pageUser(page)
     }
 
     override fun onRefresh(refreshLayout: RefreshLayout) {
-        mModel.pageUser(page)
+        viewModel.pageUser(page)
     }
 
 }

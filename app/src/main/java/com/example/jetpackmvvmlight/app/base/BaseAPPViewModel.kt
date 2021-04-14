@@ -8,8 +8,5 @@ open class BaseAPPViewModel : BaseViewModel() {
     /**
      * 接口service
      */
-    protected val mApi: APPService by lazy {
-        return@lazy RetrofitServiceManager.instance.create(APPService::class.java)
-    }
-
+    protected val api by lazy { RetrofitServiceManager.create(APPService::class.java) }
 }

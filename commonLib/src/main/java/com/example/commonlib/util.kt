@@ -28,46 +28,36 @@ import java.io.File
 /**
  * 吐司
  */
-fun toast(toast: String) {
+fun toast(toast: String) =
     UtilToast.showToast(CommonAPP.instance, toast)
-}
 
-fun Context.snackBarToast(view: View, strId: Int) {
+fun Context.snackBarToast(view: View, strId: Int) =
     Snackbar.make(view, getString(strId), Snackbar.LENGTH_SHORT).show()
-}
 
 /**
  * List<*>
  * 判断空或没数据
  */
-fun List<*>?.isNullOrEmpty(): Boolean {
-    return this == null || this.isEmpty()
-}
+fun List<*>?.isNullOrEmpty(): Boolean = this == null || this.isEmpty()
 
 /**
  * 任意类型
  * 判断是空
  */
-fun Any?.isNull(): Boolean {
-    return this == null
-}
+fun Any?.isNull(): Boolean = this == null
 
 /**
  * 任意类型
  * 判断不是空
  */
-fun Any?.isNotNull(): Boolean {
-    return this != null
-}
+fun Any?.isNotNull(): Boolean = this != null
 
 /**
  * String
  * 判断空或没数据
  */
 
-fun String?.isNullorEmpty(): Boolean {
-    return this == null || this.isEmpty()
-}
+fun String?.isNullorEmpty(): Boolean = this == null || this.isEmpty()
 
 /**
  * 根据布局id获取view
@@ -114,9 +104,8 @@ fun startActivity(context: Context, clazz: Class<*>, params: Bundle) {
 /**
  * 打印日志
  */
-fun log(tag: String, log: Any) {
-    Log.d(tag, "=====>$log")
-}
+fun log(tag: String, log: Any) = Log.d(tag, "=====>$log")
+
 
 /**
  * test数据
@@ -150,23 +139,22 @@ fun <T> BaseQuickAdapter<T, BaseViewHolder>.setPageData(
 /**
  * 设置颜色
  */
-fun Context.contextColor(color: Int): Int {
-    return ContextCompat.getColor(this, color)
-}
+fun Context.contextColor(color: Int): Int =
+    ContextCompat.getColor(this, color)
+
 
 /**
  * drawable设置资源
  */
-fun Context.contextDrawable(id: Int): Drawable {
-    return ContextCompat.getDrawable(this, id)!!
-}
+fun Context.contextDrawable(id: Int): Drawable =
+    ContextCompat.getDrawable(this, id)!!
+
 
 /**
  * mmkv对象
  */
-fun mmkv(): MMKV {
-    return MMKV.defaultMMKV()
-}
+fun mmkv(): MMKV =
+    MMKV.defaultMMKV()
 
 
 /**
@@ -176,7 +164,7 @@ fun installApk(context: Context, downloadApk: String) {
     val intent = Intent(Intent.ACTION_VIEW)
     val file = File(downloadApk)
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-        var uri =
+        val uri =
             FileProvider.getUriForFile(context, "com.lyl.chaoji.fileProvider", file)
         intent.setDataAndType(uri, "application/vnd.android.package-archive");
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
@@ -207,9 +195,9 @@ fun installApkCompetence(context: Context) {
 /**
  * 更新地址
  */
-fun updatePath(context: Context): String {
-    return context.externalCacheDir?.absolutePath + File.separator + "dachaoji.apk"
-}
+fun updatePath(context: Context): String =
+    context.externalCacheDir?.absolutePath + File.separator + "dachaoji.apk"
+
 
 /**
  * 下载文件

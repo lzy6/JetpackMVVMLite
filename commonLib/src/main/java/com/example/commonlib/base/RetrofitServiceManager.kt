@@ -1,7 +1,5 @@
 package com.example.commonlib.base
 
-import android.content.pm.PackageInfo
-import android.content.pm.PackageManager
 import com.example.commonlib.*
 import com.example.commonlib.app.Constant
 import com.example.commonlib.app.HandleErrorInterceptor
@@ -13,9 +11,16 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 
-class RetrofitServiceManager {
+object RetrofitServiceManager {
     private val okHttpClient: OkHttpClient
     private val retrofit: Retrofit
+
+    private const val DEFAULT_CONNECT_TIME = 10
+    private const val DEFAULT_WRITE_TIME = 30
+    private const val DEFAULT_READ_TIME = 30
+    private const val REQUEST_PATH = BuildConfig.BASE_URL
+
+
 
     init {
 
@@ -62,21 +67,18 @@ class RetrofitServiceManager {
         return retrofit.create(service)
     }
 
-    companion object {
-        private const val DEFAULT_CONNECT_TIME = 10
-        private const val DEFAULT_WRITE_TIME = 30
-        private const val DEFAULT_READ_TIME = 30
-        private const val REQUEST_PATH = BuildConfig.BASE_URL
-
-        private object SingletonHolder {
-            internal val INSTANCE = RetrofitServiceManager()
-        }
-
-        /*
-    * 获取RetrofitServiceManager
-    **/
-        val instance: RetrofitServiceManager
-            get() = SingletonHolder.INSTANCE
-    }
+//    companion object {
+//
+//
+//        private object SingletonHolder {
+//            internal val INSTANCE = RetrofitServiceManager()
+//        }
+//
+//        /*
+//    * 获取RetrofitServiceManager
+//    **/
+//        val instance: RetrofitServiceManager
+//            get() = SingletonHolder.INSTANCE
+//    }
 }
 

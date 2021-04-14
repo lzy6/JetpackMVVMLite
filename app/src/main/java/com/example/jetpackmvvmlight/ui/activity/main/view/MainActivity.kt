@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.item_main.view.*
 class MainActivity : BaseActivity(R.layout.activity_main),
     NavigationView.OnNavigationItemSelectedListener {
 
-    private val mAdapter by lazy { MainAdapter() }
+    private val adapter by lazy { MainAdapter() }
 
     override fun initData() {
         init()
@@ -46,7 +46,7 @@ class MainActivity : BaseActivity(R.layout.activity_main),
      * 初始化listener
      */
     private fun initListener() {
-        mAdapter.setOnItemClickListener { adapter, view, position ->
+        adapter.setOnItemClickListener { adapter, view, position ->
             val intent = Intent(this, RvDetailActivity::class.java)
             val activityOptions =
                 ActivityOptionsCompat.makeSceneTransitionAnimation(
@@ -67,8 +67,8 @@ class MainActivity : BaseActivity(R.layout.activity_main),
      * 初始化recyclerview
      */
     private fun initRv() {
-        rv_list.adapter = mAdapter
-        mAdapter.setNewInstance(data())
+        rv_list.adapter = adapter
+        adapter.setNewInstance(data())
     }
 
     /**

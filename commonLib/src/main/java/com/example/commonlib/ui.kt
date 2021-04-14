@@ -292,7 +292,7 @@ fun TextView.setHtml(html: String) {
 /**
  * 添加recyclerviewLine
  */
-fun Context.addDivider(rvList: RecyclerView, dpValue: Float) {
+fun Context.addDivider(rvList: RecyclerView, dpValue: Float) =
     dividerBuilder()
         .size(dip2px(this, dpValue))
         .showFirstDivider()
@@ -301,7 +301,7 @@ fun Context.addDivider(rvList: RecyclerView, dpValue: Float) {
         .asSpace()
         .build()
         .addTo(rvList)
-}
+
 
 /**
  * BottomSheetDialog
