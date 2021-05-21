@@ -17,6 +17,10 @@ class RvDetailActivity : BaseActivity(R.layout.activity_rv_detail) {
         initClick()
     }
 
+    override fun request() {
+
+    }
+
     private fun initClick(){
         toolbar.setNavigationOnClickListener {
             onBackPressed()

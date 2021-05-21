@@ -11,6 +11,10 @@ class AnnouncementActivity : BaseActivity(R.layout.activity_announcement) {
         initClick()
     }
 
+    override fun request() {
+
+    }
+
     /**
      * 初始化点击事件
      */

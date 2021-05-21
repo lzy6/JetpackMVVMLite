@@ -1,8 +1,13 @@
 package com.example.jetpackmvvmlight.ui.activity.main.view
 
 import androidx.activity.viewModels
-import com.example.commonlib.*
+import com.example.commonlib.apiState
 import com.example.commonlib.base.BaseActivity
+import com.example.commonlib.complete
+import com.example.commonlib.entity.Page
+import com.example.commonlib.entity.State
+import com.example.commonlib.finishMore
+import com.example.commonlib.setPageData
 import com.example.jetpackmvvmlight.R
 import com.example.jetpackmvvmlight.entity.PageUser
 import com.example.jetpackmvvmlight.ui.activity.main.viewmodel.NetWorkViewModel
@@ -19,86 +24,58 @@ class NetWorkActivity : BaseActivity(R.layout.activity_network), OnRefreshLoadMo
     override fun initData() {
         init()
         initListener()
-        request()
     }
 
     private fun initListener() {
         refresh.setOnRefreshLoadMoreListener(this)
     }
 
+
     /**
      * 数据回传
      */
-    private fun request() {
+    override fun request() {
         viewModel.run {
             /**
              * 分页回调
              */
-            pageEntityLiveData.observeInActivity(this@NetWorkActivity) { setData(it.list) }
-            pageEntityLiveData.state.observeInActivity(this@NetWorkActivity) { state ->
-                apiState(state,
-                    complete = { refresh.complete() },
-                    stateLayout = { adapter.setEmptyView(it) },
-                    hasMore = { refresh.finishMore(it) }
-                )
-            }
-
+            observe(pageEntityLiveData, ::pageEntityResult).toState(::pageEntityState)
             /**
              * 单个实体回调
              */
-            singEntityLiveData.observeInActivity(this@NetWorkActivity) {
-
-            }
-            singEntityLiveData.state.observeInActivity(this@NetWorkActivity) {
-                apiState(
-                    it,
-                    before = { showLoading() },
-                    complete = { dismissLoading() })
-            }
-
+            observe(singEntityLiveData) {}.toState(::dialogState)
             /**
              * 可以为null时回调
              */
-            mayNullLiveData.observeInActivity(this@NetWorkActivity) {
-
-            }
-            mayNullLiveData.state.observeInActivity(this@NetWorkActivity) {
-                apiState(
-                    it,
-                    before = { showLoading() },
-                    complete = { dismissLoading() })
-            }
-
+            observe(mayNullLiveData) {}.toState(::dialogState)
             /**
              * 缓存方式回调
              */
-            cacheEntityLiveData.observeInActivity(this@NetWorkActivity) {
-                //这里会执行两次回调数据，缓存数据+网络数据
-            }
-            cacheEntityLiveData.state.observeInActivity(this@NetWorkActivity) {
-                apiState(
-                    it,
-                    before = { showLoading() },
-                    complete = { dismissLoading() })
-            }
-
-            //初始调用接口
-            singEntity()
-            mayNull()
-            cacheData()
+            observe(singEntityLiveData) {}.toState(::dialogState)
         }
+    }
+
+    private fun init() {
+        initNoViewStatusBar(true)
+    }
+
+    /**
+     * 分页回调-state
+     */
+    private fun pageEntityState(state: State) {
+        apiState(state,
+            complete = { refresh.complete() },
+            stateLayout = { adapter.setEmptyView(it) },
+            hasMore = { refresh.finishMore(it) }
+        )
     }
 
     /**
      * 装填数据
      */
-    private fun setData(data: ArrayList<PageUser>) {
-        adapter.setPageData(page, data)
+    private fun pageEntityResult(data: Page<PageUser>) {
+        adapter.setPageData(page, data.list)
         page++
-    }
-
-    private fun init() {
-        initNoViewStatusBar(true)
     }
 
     override fun onLoadMore(refreshLayout: RefreshLayout) {

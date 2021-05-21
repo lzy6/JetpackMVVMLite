@@ -16,4 +16,8 @@ class SplashActivity : BaseActivity(R.layout.activity_splash) {
         finish()
     }
 
+    override fun request() {
+
+    }
+
 }

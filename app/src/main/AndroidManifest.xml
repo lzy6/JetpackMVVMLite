@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JetPackMVVMLight">
         <activity
-            android:name=".ui.activity.main.view.SplashActivity"
+            android:name=".ui.activity.main.view.NetWorkActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -26,9 +26,9 @@
         <activity
             android:name=".ui.activity.main.view.MainActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.main.view.NetWorkActivity"
-            android:screenOrientation="portrait" />
+<!--        <activity-->
+<!--            android:name=".ui.activity.main.view.NetWorkActivity"-->
+<!--            android:screenOrientation="portrait" />-->
         <activity
             android:name=".ui.activity.main.view.RvDetailActivity"
             android:screenOrientation="portrait" />

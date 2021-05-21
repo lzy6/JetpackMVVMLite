@@ -1,5 +1,7 @@
 package com.example.commonlib.base
 
+import android.app.Activity
+import androidx.appcompat.app.AppCompatActivity
 import com.example.commonlib.entity.Page
 import com.example.commonlib.entity.State
 import com.example.commonlib.widget.unpeeklivedata.UnPeekLiveData
@@ -11,6 +13,9 @@ class StateLiveData<T> : UnPeekLiveData<T>() {
 
     private var stateEntity = State()
 
+    fun AppCompatActivity.toState(action: (t: State) -> Unit) {
+        state.observeInActivity(this,) { action(it) }
+    }
 
     /**
      * 允许后台返回null

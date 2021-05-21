@@ -31,6 +31,9 @@ import java.io.File
 fun toast(toast: String) =
     UtilToast.showToast(CommonAPP.instance, toast)
 
+/**
+ * Snackbar吐司
+ */
 fun Context.snackBarToast(view: View, strId: Int) =
     Snackbar.make(view, getString(strId), Snackbar.LENGTH_SHORT).show()
 
@@ -105,18 +108,6 @@ fun startActivity(context: Context, clazz: Class<*>, params: Bundle) {
  * 打印日志
  */
 fun log(tag: String, log: Any) = Log.d(tag, "=====>$log")
-
-
-/**
- * test数据
- */
-fun getData(): ArrayList<String> {
-    val data = ArrayList<String>()
-    data.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603705847298&di=867c2c771e35479abd650d27f2062262&imgtype=0&src=http%3A%2F%2Fpic3.58cdn.com.cn%2Fzhuanzh%2Fn_v2fdd89f12343448c48244bb75c8aaa640.jpg%3Fw%3D750%26h%3D0")
-    data.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603705847298&di=867c2c771e35479abd650d27f2062262&imgtype=0&src=http%3A%2F%2Fpic3.58cdn.com.cn%2Fzhuanzh%2Fn_v2fdd89f12343448c48244bb75c8aaa640.jpg%3Fw%3D750%26h%3D0")
-    return data
-}
-
 
 /**
  * 分页拓展方法

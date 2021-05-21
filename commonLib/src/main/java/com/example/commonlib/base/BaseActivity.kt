@@ -6,9 +6,15 @@ import android.view.View
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.launcher.ARouter
 import com.example.commonlib.R
+import com.example.commonlib.apiState
 import com.example.commonlib.app.AppManager
+import com.example.commonlib.entity.State
+import com.example.commonlib.statusColor
+import com.example.commonlib.toolbarPadding
 import com.lltt.qmuilibrary.dialog.QMUITipDialog
 import com.lltt.qmuilibrary.util.QMUIStatusBarHelper
 
@@ -28,9 +34,18 @@ abstract class BaseActivity(layoutId: Int) : AppCompatActivity(layoutId) {
         initToolbar()
         initData()
         AppManager.getAppManager().addActivity(this)
+        request()
     }
 
+    /**
+     * 初始化
+     */
     abstract fun initData()
+
+    /**
+     * 请求数据及回调处理
+     */
+    abstract fun request()
 
     /**
      * 初始化标题栏，添加返回事件
@@ -49,7 +64,7 @@ abstract class BaseActivity(layoutId: Int) : AppCompatActivity(layoutId) {
     /**
      * 显示loading弹框
      */
-    protected fun showLoading() {
+    private fun showLoading() {
         if (!mQMUILoadingDialog.isShowing) {
             mQMUILoadingDialog.show()
         }
@@ -58,7 +73,7 @@ abstract class BaseActivity(layoutId: Int) : AppCompatActivity(layoutId) {
     /**
      * 关闭loading弹框
      */
-    protected fun dismissLoading() {
+    private fun dismissLoading() {
         if (mQMUILoadingDialog.isShowing) {
             mQMUILoadingDialog.dismiss()
         }
@@ -70,8 +85,8 @@ abstract class BaseActivity(layoutId: Int) : AppCompatActivity(layoutId) {
      */
     protected fun initStatusBar(view: View, isLightMode: Boolean) {
         QMUIStatusBarHelper.translucent(this)
-        toolbarPadding(view)
-        statusColor(isLightMode)
+        view.toolbarPadding()
+        statusColor(this, isLightMode)
     }
 
 
@@ -81,26 +96,7 @@ abstract class BaseActivity(layoutId: Int) : AppCompatActivity(layoutId) {
      */
     protected fun initNoViewStatusBar(isLightMode: Boolean) {
         QMUIStatusBarHelper.translucent(this)
-        statusColor(isLightMode)
-    }
-
-    fun toolbarPadding(view: View) {
-        view.run {
-            setPadding(
-                paddingLeft,
-                QMUIStatusBarHelper.getStatusBarHeight(this@BaseActivity),
-                paddingRight,
-                paddingBottom
-            )
-            val linearParams = layoutParams
-            linearParams.height += QMUIStatusBarHelper.getStatusBarHeight(this@BaseActivity)
-            layoutParams = linearParams
-        }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        AppManager.getAppManager().removeActivity(this)
+        statusColor(this, isLightMode)
     }
 
     /**
@@ -110,12 +106,32 @@ abstract class BaseActivity(layoutId: Int) : AppCompatActivity(layoutId) {
         startActivity(Intent(this, clazz))
     }
 
-    fun statusColor(isLightMode: Boolean) {
-        if (isLightMode) {
-            QMUIStatusBarHelper.setStatusBarLightMode(this)
-        } else {
-            QMUIStatusBarHelper.setStatusBarDarkMode(this)
-        }
+
+    /**
+     * dialog状态
+     */
+    fun dialogState(state: State) {
+        apiState(
+            state,
+            before = { showLoading() },
+            complete = { dismissLoading() })
+    }
+
+    fun <T> observe(
+        liveData: StateLiveData<T>,
+        action: (t: T) -> Unit
+    ): StateLiveData<T> {
+        liveData.observeInActivity(this@BaseActivity) { it?.let { t -> action(t) } }
+        return liveData
+    }
+
+    fun <T> StateLiveData<T>.toState(action: (t: State) -> Unit) {
+        state.observeInActivity(this@BaseActivity,) { action(it) }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        AppManager.getAppManager().removeActivity(this)
     }
 
 }

@@ -27,6 +27,7 @@ import com.example.commonlib.utils.HtmlUtil
 import com.fondesa.recyclerviewdivider.dividerBuilder
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
+import com.lltt.qmuilibrary.util.QMUIStatusBarHelper
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -86,9 +87,22 @@ fun View.onClick(method: () -> Unit): View {
 /**
  * 设置View的可见
  */
-fun View.isVisible(isVisible: Boolean): View {
-    visibility = if (isVisible) View.VISIBLE else View.GONE
-    return this
+fun View.visible() {
+    this.visibility = View.VISIBLE
+}
+
+/**
+ * 设置View的可见
+ */
+fun View.gone() {
+    this.visibility = View.GONE
+}
+
+/**
+ * 设置View的可见
+ */
+fun View.invisible() {
+    this.visibility = View.GONE
 }
 
 /**
@@ -174,14 +188,6 @@ fun getString(context: Context, stringID: Int, vararg args: Any): String {
  * 加载图片，直接传入url
  */
 fun ImageView.loadImage(url: String) {
-    loadImage(context, url, R.color.colorAccent)
-}
-
-/**
- * ImageView
- * 加载图片，直接传入context,url
- */
-fun ImageView.loadImage(context: Context, url: String?) {
     loadImage(context, url, R.color.colorAccent)
 }
 
@@ -320,6 +326,9 @@ fun BottomSheetDialog.initBottomSheetDialog(context: Context, layout: Int): View
     return view
 }
 
+/**
+ * 用户协议
+ */
 fun TextView.protocol(content: String, click: (index: Int) -> Unit) {
     val style = SpannableStringBuilder(content)
     var index = 0
@@ -350,4 +359,31 @@ fun TextView.protocol(content: String, click: (index: Int) -> Unit) {
     text = style
 }
 
+/**
+ * 设置toolbar黑白
+ */
+fun statusColor(activity: Activity,isLightMode: Boolean) {
+    if (isLightMode) {
+        QMUIStatusBarHelper.setStatusBarLightMode(activity)
+    } else {
+        QMUIStatusBarHelper.setStatusBarDarkMode(activity)
+    }
+}
+
+/**
+ * toolbar-padding
+ */
+fun View.toolbarPadding() {
+    run {
+        setPadding(
+            paddingLeft,
+            QMUIStatusBarHelper.getStatusBarHeight(this.context),
+            paddingRight,
+            paddingBottom
+        )
+        val linearParams = layoutParams
+        linearParams.height += QMUIStatusBarHelper.getStatusBarHeight(this.context)
+        layoutParams = linearParams
+    }
+}
 

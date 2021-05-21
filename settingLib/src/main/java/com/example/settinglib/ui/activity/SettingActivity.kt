@@ -7,6 +7,8 @@ import com.example.commonlib.base.BaseActivity
 import com.example.settinglib.R
 import com.example.settinglib.ui.viewmodel.SettingViewModel
 import kotlinx.android.synthetic.main.activity_setting.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 @Route(path = RoutePath.SettingActivity)
 class SettingActivity : BaseActivity(R.layout.activity_setting) {
@@ -16,6 +18,10 @@ class SettingActivity : BaseActivity(R.layout.activity_setting) {
     override fun initData() {
         init()
         initClick()
+    }
+
+    override fun request() {
+
     }
 
     private fun initClick() {

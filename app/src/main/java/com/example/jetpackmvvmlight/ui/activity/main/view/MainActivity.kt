@@ -33,6 +33,10 @@ class MainActivity : BaseActivity(R.layout.activity_main),
         initListener()
     }
 
+    override fun request() {
+
+    }
+
     /**
      * 初始化点击事件
      */
