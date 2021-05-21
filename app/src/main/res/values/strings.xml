@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">JetPackMVVMLight</string>
+    <string name="app_name">JetpackMVVMLite</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
     <string name="issue">发布</string>
