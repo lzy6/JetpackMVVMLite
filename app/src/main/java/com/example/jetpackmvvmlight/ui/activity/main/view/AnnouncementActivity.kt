@@ -1,10 +1,13 @@
 package com.example.jetpackmvvmlight.ui.activity.main.view
 
 import com.example.commonlib.base.BaseActivity
+import com.example.commonlib.viewBinding
 import com.example.jetpackmvvmlight.R
-import kotlinx.android.synthetic.main.activity_announcement.*
+import com.example.jetpackmvvmlight.databinding.ActivityAnnouncementBinding
 
 class AnnouncementActivity : BaseActivity(R.layout.activity_announcement) {
+
+    private val viewBind by viewBinding(ActivityAnnouncementBinding::inflate)
 
     override fun initData() {
         init()
@@ -19,7 +22,7 @@ class AnnouncementActivity : BaseActivity(R.layout.activity_announcement) {
      * 初始化点击事件
      */
     private fun initClick() {
-        toolbar.setNavigationOnClickListener {
+        viewBind.toolbar.setNavigationOnClickListener {
             onBackPressed()
         }
     }
@@ -28,7 +31,7 @@ class AnnouncementActivity : BaseActivity(R.layout.activity_announcement) {
      * 初始化
      */
     private fun init() {
-        setSupportActionBar(toolbar)
+        setSupportActionBar(viewBind.toolbar)
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
         }

@@ -2,10 +2,13 @@ package com.example.jetpackmvvmlight.ui.activity.main.view
 
 import androidx.core.view.ViewCompat
 import com.example.commonlib.base.BaseActivity
+import com.example.commonlib.viewBinding
 import com.example.jetpackmvvmlight.R
-import kotlinx.android.synthetic.main.activity_rv_detail.*
+import com.example.jetpackmvvmlight.databinding.ActivityRvDetailBinding
 
 class RvDetailActivity : BaseActivity(R.layout.activity_rv_detail) {
+
+    private val viewBind by viewBinding(ActivityRvDetailBinding::inflate)
 
     companion object {
         const val IMAGE = "image"
@@ -22,7 +25,7 @@ class RvDetailActivity : BaseActivity(R.layout.activity_rv_detail) {
     }
 
     private fun initClick(){
-        toolbar.setNavigationOnClickListener {
+        viewBind.toolbar.setNavigationOnClickListener {
             onBackPressed()
         }
     }
@@ -31,13 +34,13 @@ class RvDetailActivity : BaseActivity(R.layout.activity_rv_detail) {
      * 初始化
      */
     private fun init() {
-        setSupportActionBar(toolbar)
+        setSupportActionBar(viewBind.toolbar)
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
         }
 
-        ViewCompat.setTransitionName(iv_img, IMAGE)
-        ViewCompat.setTransitionName(tv_title, TITLE)
+        ViewCompat.setTransitionName(viewBind.ivImg, IMAGE)
+        ViewCompat.setTransitionName(viewBind.tvTitle, TITLE)
     }
 
 }

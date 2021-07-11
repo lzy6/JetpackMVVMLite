@@ -10,6 +10,7 @@
     tools:context=".ui.activity.main.view.MainActivity">
 
     <include
+        android:id="@+id/include_main"
         layout="@layout/drawer_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

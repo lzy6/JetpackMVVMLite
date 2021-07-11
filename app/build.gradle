@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'kotlin-android-extensions'
     id 'kotlin-kapt'
 }
 
@@ -34,6 +33,10 @@ android {
         addFieldsAndPlaceholders(it, [
                 "BASE_URL": "http://your.environment",
         ])
+    }
+
+    viewBinding {
+        enabled = true
     }
 
     buildTypes {

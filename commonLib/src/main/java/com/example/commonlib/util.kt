@@ -11,11 +11,15 @@ import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.fragment.app.Fragment
+import androidx.viewbinding.ViewBinding
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.example.commonlib.app.Constant
+import com.example.commonlib.utils.FragmentViewBindingDelegate
 import com.example.commonlib.utils.UtilToast
 import com.google.android.material.snackbar.Snackbar
 import com.liulishuo.filedownloader.BaseDownloadTask
@@ -232,3 +236,13 @@ fun isLogin(): Boolean {
     val token = mmkv().decodeString(Constant.TOKEN)
     return !token.isNullorEmpty()
 }
+
+inline fun <T : ViewBinding> AppCompatActivity.viewBinding(crossinline bindingInflater: (LayoutInflater) -> T) =
+    lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
+        val invoke = bindingInflater.invoke(layoutInflater)
+        setContentView(invoke.root) //可选
+        invoke
+    }
+
+fun <T : ViewBinding> Fragment.viewBinding(viewBindingFactory: (View) -> T) =
+    FragmentViewBindingDelegate(this, viewBindingFactory)

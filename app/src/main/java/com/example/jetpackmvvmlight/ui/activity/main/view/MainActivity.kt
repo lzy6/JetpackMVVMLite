@@ -14,16 +14,15 @@ import com.example.commonlib.base.BaseActivity
 import com.example.commonlib.data
 import com.example.commonlib.onClick
 import com.example.commonlib.snackBarToast
+import com.example.commonlib.viewBinding
 import com.example.jetpackmvvmlight.R
+import com.example.jetpackmvvmlight.databinding.ActivityMainBinding
 import com.example.jetpackmvvmlight.ui.adapter.MainAdapter
 import com.google.android.material.navigation.NavigationView
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.drawer_main.*
-import kotlinx.android.synthetic.main.item_main.view.*
 
 class MainActivity : BaseActivity(R.layout.activity_main),
     NavigationView.OnNavigationItemSelectedListener {
-
+    private val viewBind by viewBinding(ActivityMainBinding::inflate)
     private val adapter by lazy { MainAdapter() }
 
     override fun initData() {
@@ -31,6 +30,7 @@ class MainActivity : BaseActivity(R.layout.activity_main),
         initClick()
         initRv()
         initListener()
+
     }
 
     override fun request() {
@@ -41,8 +41,8 @@ class MainActivity : BaseActivity(R.layout.activity_main),
      * 初始化点击事件
      */
     private fun initClick() {
-        fab.onClick {
-            snackBarToast(fab, R.string.issue)
+        viewBind.includeMain.fab.onClick {
+            snackBarToast(viewBind.includeMain.fab, R.string.issue)
         }
     }
 
@@ -55,8 +55,8 @@ class MainActivity : BaseActivity(R.layout.activity_main),
             val activityOptions =
                 ActivityOptionsCompat.makeSceneTransitionAnimation(
                     this,
-                    Pair<View, String>(view.iv_img, RvDetailActivity.IMAGE),
-                    Pair<View, String>(view.tv_title, RvDetailActivity.TITLE)
+                    Pair<View, String>(view.findViewById(R.id.iv_img), RvDetailActivity.IMAGE),
+                    Pair<View, String>(view.findViewById(R.id.tv_title), RvDetailActivity.TITLE)
                 )
 
             ActivityCompat.startActivity(
@@ -71,7 +71,7 @@ class MainActivity : BaseActivity(R.layout.activity_main),
      * 初始化recyclerview
      */
     private fun initRv() {
-        rv_list.adapter = adapter
+        viewBind.includeMain.rvList.adapter = adapter
         adapter.setNewInstance(data())
     }
 
@@ -79,16 +79,20 @@ class MainActivity : BaseActivity(R.layout.activity_main),
      * 初始化toolbar
      */
     private fun init() {
-        setSupportActionBar(toolbar)
+        setSupportActionBar(viewBind.includeMain.toolbar)
         ActionBarDrawerToggle(
-            this, drawer_layout, toolbar, R.string.drawer_open, R.string.drawer_close
+            this,
+            viewBind.drawerLayout,
+            viewBind.includeMain.toolbar,
+            R.string.drawer_open,
+            R.string.drawer_close
         ).run {
-            drawer_layout.addDrawerListener(this)
+            viewBind.drawerLayout.addDrawerListener(this)
             syncState()
         }
 
-        view_nav.setNavigationItemSelectedListener(this)
-        view_nav.itemIconTintList = null
+        viewBind.viewNav.setNavigationItemSelectedListener(this)
+        viewBind.viewNav.itemIconTintList = null
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -97,7 +101,7 @@ class MainActivity : BaseActivity(R.layout.activity_main),
             R.id.nav_settings -> ARouter.getInstance().build(RoutePath.SettingActivity)
                 .navigation()
         }
-        drawer_layout.closeDrawer(GravityCompat.START)
+        viewBind.drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
 
