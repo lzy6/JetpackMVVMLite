@@ -1,12 +1,18 @@
 package com.example.jetpackmvvmlight.ui.adapter
 
+import android.view.ViewGroup
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.example.commonlib.BindingViewHolder
+import com.example.commonlib.newBindingViewHolder
 import com.example.jetpackmvvmlight.R
+import com.example.jetpackmvvmlight.databinding.ItemMainBinding
 
-class MainAdapter :BaseQuickAdapter<String,BaseViewHolder>(R.layout.item_main) {
+class MainAdapter :BaseQuickAdapter<String,BindingViewHolder<ItemMainBinding>>(R.layout.item_main) {
 
-    override fun convert(holder: BaseViewHolder, item: String) {
+    override fun onCreateDefViewHolder(parent: ViewGroup, viewType: Int) =
+        newBindingViewHolder<ItemMainBinding>(parent)
+
+    override fun convert(holder: BindingViewHolder<ItemMainBinding>, item: String) {
 
     }
 

@@ -12,6 +12,7 @@ import android.text.method.PasswordTransformationMethod
 import android.text.style.ClickableSpan
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.BaseAdapter
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -22,9 +23,11 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.chad.library.adapter.base.BaseQuickAdapter
 import com.example.commonlib.entity.Page
 import com.example.commonlib.utils.HtmlUtil
 import com.fondesa.recyclerviewdivider.dividerBuilder
+import com.fondesa.recyclerviewdivider.visibility.VisibilityProvider
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import com.lltt.qmuilibrary.util.QMUIStatusBarHelper
@@ -185,10 +188,20 @@ fun getString(context: Context, stringID: Int, vararg args: Any): String {
 
 /**
  * ImageView
- * 加载图片，直接传入url
+ * 加载网络图片
  */
 fun ImageView.loadImage(url: String) {
     loadImage(context, url, R.color.colorAccent)
+}
+
+/**
+ * ImageView
+ * 加载本地图片
+ */
+fun ImageView.loadImage(url: Int) {
+    Glide.with(context)
+        .load(url)
+        .into(this)
 }
 
 /**
@@ -200,7 +213,6 @@ fun ImageView.loadImage(context: Context, url: String?, placeholder: Int) {
         Glide.with(context)
             .load(it)
             .placeholder(placeholder)
-            .diskCacheStrategy(DiskCacheStrategy.DATA)
             .into(this)
     }
 }
@@ -208,9 +220,17 @@ fun ImageView.loadImage(context: Context, url: String?, placeholder: Int) {
 /**
  * dp转px
  */
-fun dip2px(context: Context, dpValue: Float): Int {
-    val scale = context.resources.displayMetrics.density
+fun Context.dp2px(dpValue: Float): Int {
+    val scale = resources.displayMetrics.density
     return (dpValue * scale + 0.5f).toInt()
+}
+
+/**
+ * px转dp
+ */
+fun Context.px2dp(px: Int): Int {
+    val scale = resources.displayMetrics.density
+    return (px / scale + 0.5f).toInt()
 }
 
 /**
@@ -298,16 +318,37 @@ fun TextView.setHtml(html: String) {
 /**
  * 添加recyclerviewLine
  */
-fun Context.addDivider(rvList: RecyclerView, dpValue: Float) =
-    dividerBuilder()
-        .size(dip2px(this, dpValue))
-        .showFirstDivider()
-        .showLastDivider()
-        .showSideDividers()
-        .asSpace()
-        .build()
-        .addTo(rvList)
+fun RecyclerView.addDivider(
+    dpValue: Float,
+    showFirstDivider: Boolean? = null,
+    showLastDivider: Boolean? = null,
+    showSideDividers: Boolean? = null,
+) =
+    this.context.run {
+        val builder = dividerBuilder()
 
+//        showFirstDivider?.let { builder.showFirstDivider() }
+//
+//        showLastDivider?.let { builder.showLastDivider() }
+//
+//        showSideDividers?.let { if (showSideDividers.isNull()) builder.showSideDividers() }
+
+        if (showFirstDivider.isNull()) builder.showFirstDivider()
+
+        if (showLastDivider.isNull()) builder.showLastDivider()
+
+        if (showSideDividers.isNull()) builder.showSideDividers()
+
+        builder.size(dp2px(dpValue))
+            .asSpace()
+            .build()
+            .addTo(this@addDivider)
+    }
+
+
+fun RecyclerView.hasFixedSize() {
+    setHasFixedSize(true)
+}
 
 /**
  * BottomSheetDialog
@@ -362,7 +403,7 @@ fun TextView.protocol(content: String, click: (index: Int) -> Unit) {
 /**
  * 设置toolbar黑白
  */
-fun statusColor(activity: Activity,isLightMode: Boolean) {
+fun statusColor(activity: Activity, isLightMode: Boolean) {
     if (isLightMode) {
         QMUIStatusBarHelper.setStatusBarLightMode(activity)
     } else {
@@ -385,5 +426,9 @@ fun View.toolbarPadding() {
         linearParams.height += QMUIStatusBarHelper.getStatusBarHeight(this.context)
         layoutParams = linearParams
     }
+}
+
+fun Context.compatColor(color:Int):Int{
+   return ContextCompat.getColor(this,color)
 }
 

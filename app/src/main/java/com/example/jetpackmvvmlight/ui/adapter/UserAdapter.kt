@@ -1,12 +1,19 @@
 package com.example.jetpackmvvmlight.ui.adapter
 
+import android.view.ViewGroup
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.example.commonlib.BindingViewHolder
+import com.example.commonlib.newBindingViewHolder
 import com.example.jetpackmvvmlight.R
+import com.example.jetpackmvvmlight.databinding.ItemUserBinding
 import com.example.jetpackmvvmlight.entity.PageUser
 
-class UserAdapter :BaseQuickAdapter<PageUser,BaseViewHolder>(R.layout.item_user) {
-    override fun convert(holder: BaseViewHolder, item: PageUser) {
+class UserAdapter :BaseQuickAdapter<PageUser,BindingViewHolder<ItemUserBinding>>(R.layout.item_user) {
+
+    override fun onCreateDefViewHolder(parent: ViewGroup, viewType: Int) =
+        newBindingViewHolder<ItemUserBinding>(parent)
+
+    override fun convert(holder: BindingViewHolder<ItemUserBinding>, item: PageUser) {
 
     }
 }

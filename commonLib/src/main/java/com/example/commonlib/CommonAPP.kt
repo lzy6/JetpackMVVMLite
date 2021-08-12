@@ -16,16 +16,7 @@ open class CommonAPP : Application() {
         lateinit var instance: Application
 
         init {
-            SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout ->
-                ClassicsHeader(
-                    context
-                )
-            }
-            SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout ->
-                ClassicsFooter(
-                    context
-                ).setSpinnerStyle(SpinnerStyle.Translate)
-            }
+            initSmartRefresh()
         }
     }
 
@@ -34,17 +25,5 @@ open class CommonAPP : Application() {
         instance = this
         initARouter()
         initMMKV()
-    }
-
-    private fun initMMKV() {
-        MMKV.initialize(this)
-    }
-
-    private fun initARouter() {
-        if (BuildConfig.DEBUG) {
-            ARouter.openLog()
-            ARouter.openDebug()
-        }
-        ARouter.init(this)
     }
 }

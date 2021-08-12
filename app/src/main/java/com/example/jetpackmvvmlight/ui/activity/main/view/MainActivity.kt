@@ -9,12 +9,9 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import androidx.core.view.GravityCompat
 import com.alibaba.android.arouter.launcher.ARouter
+import com.example.commonlib.*
 import com.example.commonlib.app.RoutePath
 import com.example.commonlib.base.BaseActivity
-import com.example.commonlib.data
-import com.example.commonlib.onClick
-import com.example.commonlib.snackBarToast
-import com.example.commonlib.viewBinding
 import com.example.jetpackmvvmlight.R
 import com.example.jetpackmvvmlight.databinding.ActivityMainBinding
 import com.example.jetpackmvvmlight.ui.adapter.MainAdapter
@@ -97,7 +94,7 @@ class MainActivity : BaseActivity(R.layout.activity_main),
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.nav_announcement -> startActivity(AnnouncementActivity::class.java)
+            R.id.nav_announcement -> startKtxActivity<AnnouncementActivity>()
             R.id.nav_settings -> ARouter.getInstance().build(RoutePath.SettingActivity)
                 .navigation()
         }

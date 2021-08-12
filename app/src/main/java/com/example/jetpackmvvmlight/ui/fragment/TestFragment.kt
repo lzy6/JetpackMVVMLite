@@ -16,6 +16,10 @@ class TestFragment : BaseFragment() {
     }
 
     override fun lazyFetchData() {
-        
+
+    }
+
+    override fun request() {
+
     }
 }

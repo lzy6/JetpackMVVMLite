@@ -1,6 +1,7 @@
 package com.example.commonlib
 
 import android.app.Activity
+import android.content.ClipData
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
@@ -8,13 +9,16 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
@@ -25,21 +29,13 @@ import com.google.android.material.snackbar.Snackbar
 import com.liulishuo.filedownloader.BaseDownloadTask
 import com.liulishuo.filedownloader.FileDownloadListener
 import com.liulishuo.filedownloader.FileDownloader
+import com.scwang.smart.refresh.footer.ClassicsFooter
+import com.scwang.smart.refresh.header.ClassicsHeader
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
+import com.scwang.smart.refresh.layout.constant.SpinnerStyle
 import com.tencent.mmkv.MMKV
 import java.io.File
 
-
-/**
- * 吐司
- */
-fun toast(toast: String) =
-    UtilToast.showToast(CommonAPP.instance, toast)
-
-/**
- * Snackbar吐司
- */
-fun Context.snackBarToast(view: View, strId: Int) =
-    Snackbar.make(view, getString(strId), Snackbar.LENGTH_SHORT).show()
 
 /**
  * List<*>
@@ -74,49 +70,9 @@ fun getLayoutView(context: Context, layout: Int): View {
 }
 
 /**
- * 根据bundle+flags跳转activity
- */
-fun startActivity(context: Context, clazz: Class<*>, params: Bundle, flags: Int) {
-    val intent = Intent(context, clazz)
-    intent.putExtras(params)
-    intent.flags = flags
-    context.startActivity(intent)
-}
-
-/**
- * 直接跳转activity
- */
-fun startActivity(context: Context, clazz: Class<*>) {
-    context.startActivity(Intent(context, clazz))
-}
-
-/**
- * 根据flags跳转activity
- */
-fun startActivity(context: Context, clazz: Class<*>, flags: Int) {
-    val intent = Intent(context, clazz)
-    intent.flags = flags
-    context.startActivity(intent)
-}
-
-/**
- * 根据bundle跳转activity
- */
-fun startActivity(context: Context, clazz: Class<*>, params: Bundle) {
-    val intent = Intent(context, clazz)
-    intent.putExtras(params)
-    context.startActivity(intent)
-}
-
-/**
- * 打印日志
- */
-fun log(tag: String, log: Any) = Log.d(tag, "=====>$log")
-
-/**
  * 分页拓展方法
  */
-fun <T> BaseQuickAdapter<T, BaseViewHolder>.setPageData(
+fun <T, VB : ViewBinding> BaseQuickAdapter<T, BindingViewHolder<VB>>.setPageData(
     page: Int,
     data: ArrayList<T>,
     first: (() -> Unit)? = null,
@@ -130,12 +86,6 @@ fun <T> BaseQuickAdapter<T, BaseViewHolder>.setPageData(
         other?.invoke()
     }
 }
-
-/**
- * 设置颜色
- */
-fun Context.contextColor(color: Int): Int =
-    ContextCompat.getColor(this, color)
 
 
 /**
@@ -201,7 +151,8 @@ fun fileDownloader(
     context: Context, downloadUrl: String,
     completed: (() -> Unit)? = null,
     pending: (() -> Unit)? = null,
-    progress: ((soFarBytes: Int, totalBytes: Int) -> Unit)? = null, ) {
+    progress: ((soFarBytes: Int, totalBytes: Int) -> Unit)? = null,
+) {
     FileDownloader.setup(context)
     FileDownloader.getImpl().create(downloadUrl)
         .setPath(updatePath(context))
@@ -237,6 +188,9 @@ fun isLogin(): Boolean {
     return !token.isNullorEmpty()
 }
 
+/**
+ * 设置Activity viewbinding
+ */
 inline fun <T : ViewBinding> AppCompatActivity.viewBinding(crossinline bindingInflater: (LayoutInflater) -> T) =
     lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
         val invoke = bindingInflater.invoke(layoutInflater)
@@ -244,5 +198,26 @@ inline fun <T : ViewBinding> AppCompatActivity.viewBinding(crossinline bindingIn
         invoke
     }
 
+/**
+ * 设置Fragment viewbinding
+ */
 fun <T : ViewBinding> Fragment.viewBinding(viewBindingFactory: (View) -> T) =
     FragmentViewBindingDelegate(this, viewBindingFactory)
+
+/**
+ * adapter viewBinding
+ */
+class BindingViewHolder<VB : ViewBinding>(val binding: VB) : BaseViewHolder(binding.root)
+
+inline fun <reified T : ViewBinding> newBindingViewHolder(parent: ViewGroup): BindingViewHolder<T> {
+    val method = T::class.java.getMethod(
+        "inflate",
+        LayoutInflater::class.java,
+        ViewGroup::class.java,
+        Boolean::class.java
+    )
+    val binding = method.invoke(null, LayoutInflater.from(parent.context), parent, false) as T
+    return BindingViewHolder(binding)
+}
+
+

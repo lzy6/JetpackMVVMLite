@@ -1,20 +1,16 @@
 package com.example.commonlib.base
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
+import androidx.appcompat.widget.Toolbar
 import com.alibaba.android.arouter.launcher.ARouter
-import com.example.commonlib.R
-import com.example.commonlib.apiState
+import com.example.commonlib.*
 import com.example.commonlib.app.AppManager
 import com.example.commonlib.entity.State
-import com.example.commonlib.statusColor
-import com.example.commonlib.toolbarPadding
 import com.lltt.qmuilibrary.dialog.QMUITipDialog
 import com.lltt.qmuilibrary.util.QMUIStatusBarHelper
 
@@ -30,10 +26,10 @@ abstract class BaseActivity(layoutId: Int) : AppCompatActivity(layoutId) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ARouter.getInstance().inject(this)
-        initToolbar()
-        initData()
         AppManager.getAppManager().addActivity(this)
+        ARouter.getInstance().inject(this)
+        initData()
+        initToolbar()
         request()
     }
 
@@ -51,15 +47,18 @@ abstract class BaseActivity(layoutId: Int) : AppCompatActivity(layoutId) {
      * 初始化标题栏，添加返回事件
      */
     protected open fun initToolbar() {
-        if (findViewById<TextView>(R.id.toolbar_title) != null) {
-            (findViewById<TextView>(R.id.toolbar_title)).text = title
+
+        (findViewById<TextView>(R.id.toolbar_title))?.run {
+            if (title.isNullOrEmpty()) return@run
+            text = title
         }
-        if (findViewById<RelativeLayout>(R.id.toolbar_back) != null) {
-            findViewById<RelativeLayout>(R.id.toolbar_back).setOnClickListener { v ->
+        (findViewById<RelativeLayout>(R.id.toolbar_back))?.run {
+            setOnClickListener { v ->
                 onBackPressed()
             }
         }
     }
+
 
     /**
      * 显示loading弹框
@@ -86,7 +85,16 @@ abstract class BaseActivity(layoutId: Int) : AppCompatActivity(layoutId) {
     protected fun initStatusBar(view: View, isLightMode: Boolean) {
         QMUIStatusBarHelper.translucent(this)
         view.toolbarPadding()
-        statusColor(this, isLightMode)
+        initNoViewStatusBar(isLightMode)
+    }
+
+    /**
+     * 设置状态栏
+     * @param isLightMode true-黑色，false-白色
+     */
+    protected fun initStatusBar(view: View) {
+        QMUIStatusBarHelper.translucent(this)
+        view.toolbarPadding()
     }
 
 
@@ -97,13 +105,6 @@ abstract class BaseActivity(layoutId: Int) : AppCompatActivity(layoutId) {
     protected fun initNoViewStatusBar(isLightMode: Boolean) {
         QMUIStatusBarHelper.translucent(this)
         statusColor(this, isLightMode)
-    }
-
-    /**
-     * 直接跳转activity
-     */
-    fun startActivity(clazz: Class<*>) {
-        startActivity(Intent(this, clazz))
     }
 
 
@@ -117,16 +118,22 @@ abstract class BaseActivity(layoutId: Int) : AppCompatActivity(layoutId) {
             complete = { dismissLoading() })
     }
 
+    /**
+     * 接口方法
+     */
     fun <T> observe(
         liveData: StateLiveData<T>,
-        action: (t: T) -> Unit
+        action: (t: T) -> Unit,
     ): StateLiveData<T> {
-        liveData.observeInActivity(this@BaseActivity) { it?.let { t -> action(t) } }
+        liveData.observeInActivity(this) { it?.let { t -> action(t) } }
         return liveData
     }
 
+    /**
+     * 结果状态
+     */
     fun <T> StateLiveData<T>.toState(action: (t: State) -> Unit) {
-        state.observeInActivity(this@BaseActivity,) { action(it) }
+        state.observeInActivity(this@BaseActivity) { action(it) }
     }
 
     override fun onDestroy() {
