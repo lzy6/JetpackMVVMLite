@@ -8,7 +8,7 @@ import com.example.jetpackmvvmlight.R
 import com.example.jetpackmvvmlight.databinding.ItemUserBinding
 import com.example.jetpackmvvmlight.entity.PageUser
 
-class UserAdapter :BaseQuickAdapter<PageUser,BindingViewHolder<ItemUserBinding>>(R.layout.item_user) {
+class UserAdapter :BaseQuickAdapter<PageUser,BindingViewHolder<ItemUserBinding>>(0) {
 
     override fun onCreateDefViewHolder(parent: ViewGroup, viewType: Int) =
         newBindingViewHolder<ItemUserBinding>(parent)

@@ -14,7 +14,7 @@ import com.example.commonlib.entity.State
 import com.lltt.qmuilibrary.dialog.QMUITipDialog
 import com.lltt.qmuilibrary.util.QMUIStatusBarHelper
 
-abstract class BaseActivity(layoutId: Int) : AppCompatActivity(layoutId) {
+abstract class BaseActivity : AppCompatActivity() {
 
     protected val TAG = this::class.java.simpleName
 

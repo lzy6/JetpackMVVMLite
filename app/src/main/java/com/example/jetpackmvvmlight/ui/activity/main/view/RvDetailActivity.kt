@@ -6,7 +6,7 @@ import com.example.commonlib.viewBinding
 import com.example.jetpackmvvmlight.R
 import com.example.jetpackmvvmlight.databinding.ActivityRvDetailBinding
 
-class RvDetailActivity : BaseActivity(R.layout.activity_rv_detail) {
+class RvDetailActivity : BaseActivity() {
 
     private val viewBind by viewBinding(ActivityRvDetailBinding::inflate)
 

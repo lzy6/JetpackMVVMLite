@@ -5,7 +5,7 @@ import com.example.commonlib.viewBinding
 import com.example.jetpackmvvmlight.R
 import com.example.jetpackmvvmlight.databinding.ActivityAnnouncementBinding
 
-class AnnouncementActivity : BaseActivity(R.layout.activity_announcement) {
+class AnnouncementActivity : BaseActivity() {
 
     private val viewBind by viewBinding(ActivityAnnouncementBinding::inflate)
 

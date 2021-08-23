@@ -17,7 +17,7 @@ import com.example.jetpackmvvmlight.databinding.ActivityMainBinding
 import com.example.jetpackmvvmlight.ui.adapter.MainAdapter
 import com.google.android.material.navigation.NavigationView
 
-class MainActivity : BaseActivity(R.layout.activity_main),
+class MainActivity : BaseActivity(),
     NavigationView.OnNavigationItemSelectedListener {
     private val viewBind by viewBinding(ActivityMainBinding::inflate)
     private val adapter by lazy { MainAdapter() }

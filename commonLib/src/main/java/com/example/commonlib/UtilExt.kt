@@ -1,38 +1,22 @@
 package com.example.commonlib
 
 import android.app.Activity
-import android.content.ClipData
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
-import android.os.Bundle
 import android.provider.Settings
-import android.text.TextUtils
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.example.commonlib.app.Constant
-import com.example.commonlib.utils.FragmentViewBindingDelegate
-import com.example.commonlib.utils.UtilToast
-import com.google.android.material.snackbar.Snackbar
 import com.liulishuo.filedownloader.BaseDownloadTask
 import com.liulishuo.filedownloader.FileDownloadListener
 import com.liulishuo.filedownloader.FileDownloader
-import com.scwang.smart.refresh.footer.ClassicsFooter
-import com.scwang.smart.refresh.header.ClassicsHeader
-import com.scwang.smart.refresh.layout.SmartRefreshLayout
-import com.scwang.smart.refresh.layout.constant.SpinnerStyle
 import com.tencent.mmkv.MMKV
 import java.io.File
 
@@ -189,35 +173,17 @@ fun isLogin(): Boolean {
 }
 
 /**
- * 设置Activity viewbinding
+ * 屏幕宽度
  */
-inline fun <T : ViewBinding> AppCompatActivity.viewBinding(crossinline bindingInflater: (LayoutInflater) -> T) =
-    lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
-        val invoke = bindingInflater.invoke(layoutInflater)
-        setContentView(invoke.root) //可选
-        invoke
-    }
+fun Context.screenWidth(): Int {
+    return resources.displayMetrics.widthPixels
+}
 
 /**
- * 设置Fragment viewbinding
+ * 屏幕高度
  */
-fun <T : ViewBinding> Fragment.viewBinding(viewBindingFactory: (View) -> T) =
-    FragmentViewBindingDelegate(this, viewBindingFactory)
-
-/**
- * adapter viewBinding
- */
-class BindingViewHolder<VB : ViewBinding>(val binding: VB) : BaseViewHolder(binding.root)
-
-inline fun <reified T : ViewBinding> newBindingViewHolder(parent: ViewGroup): BindingViewHolder<T> {
-    val method = T::class.java.getMethod(
-        "inflate",
-        LayoutInflater::class.java,
-        ViewGroup::class.java,
-        Boolean::class.java
-    )
-    val binding = method.invoke(null, LayoutInflater.from(parent.context), parent, false) as T
-    return BindingViewHolder(binding)
+fun Context.screenHeight(): Int {
+    return resources.displayMetrics.heightPixels
 }
 
 

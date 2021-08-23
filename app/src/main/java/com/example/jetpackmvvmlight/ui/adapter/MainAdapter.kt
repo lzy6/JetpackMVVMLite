@@ -7,7 +7,7 @@ import com.example.commonlib.newBindingViewHolder
 import com.example.jetpackmvvmlight.R
 import com.example.jetpackmvvmlight.databinding.ItemMainBinding
 
-class MainAdapter :BaseQuickAdapter<String,BindingViewHolder<ItemMainBinding>>(R.layout.item_main) {
+class MainAdapter :BaseQuickAdapter<String,BindingViewHolder<ItemMainBinding>>(0) {
 
     override fun onCreateDefViewHolder(parent: ViewGroup, viewType: Int) =
         newBindingViewHolder<ItemMainBinding>(parent)

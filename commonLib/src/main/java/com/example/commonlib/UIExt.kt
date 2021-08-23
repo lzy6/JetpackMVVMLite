@@ -12,7 +12,6 @@ import android.text.method.PasswordTransformationMethod
 import android.text.style.ClickableSpan
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.BaseAdapter
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -22,14 +21,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.chad.library.adapter.base.BaseQuickAdapter
 import com.example.commonlib.entity.Page
 import com.example.commonlib.utils.HtmlUtil
 import com.fondesa.recyclerviewdivider.dividerBuilder
-import com.fondesa.recyclerviewdivider.visibility.VisibilityProvider
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.snackbar.Snackbar
+import com.lltt.qmuilibrary.layout.IQMUILayout
 import com.lltt.qmuilibrary.util.QMUIStatusBarHelper
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import kotlinx.coroutines.delay
@@ -40,17 +35,6 @@ import kotlinx.coroutines.launch
  */
 fun ViewPager2.setOnPageChangeListener(method: (position: Int) -> Unit): ViewPager2 {
     this.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-        override fun onPageScrollStateChanged(state: Int) {
-            super.onPageScrollStateChanged(state)
-        }
-
-        override fun onPageScrolled(
-            position: Int,
-            positionOffset: Float,
-            positionOffsetPixels: Int
-        ) {
-            super.onPageScrolled(position, positionOffset, positionOffsetPixels)
-        }
 
         override fun onPageSelected(position: Int) {
             super.onPageSelected(position)
@@ -327,12 +311,6 @@ fun RecyclerView.addDivider(
     this.context.run {
         val builder = dividerBuilder()
 
-//        showFirstDivider?.let { builder.showFirstDivider() }
-//
-//        showLastDivider?.let { builder.showLastDivider() }
-//
-//        showSideDividers?.let { if (showSideDividers.isNull()) builder.showSideDividers() }
-
         if (showFirstDivider.isNull()) builder.showFirstDivider()
 
         if (showLastDivider.isNull()) builder.showLastDivider()
@@ -345,26 +323,11 @@ fun RecyclerView.addDivider(
             .addTo(this@addDivider)
     }
 
-
+/**
+ * 设置recyclerview setHasFixedSize
+ */
 fun RecyclerView.hasFixedSize() {
     setHasFixedSize(true)
-}
-
-/**
- * BottomSheetDialog
- * 从底部向上弹dialog，自定义布局
- */
-fun BottomSheetDialog.initBottomSheetDialog(context: Context, layout: Int): View {
-    val view = getLayoutView(context, layout)
-    setContentView(view)
-    (view.parent as View).setBackgroundColor(
-        ContextCompat.getColor(
-            context,
-            android.R.color.transparent
-        )
-    )
-    show()
-    return view
 }
 
 /**
@@ -428,7 +391,35 @@ fun View.toolbarPadding() {
     }
 }
 
-fun Context.compatColor(color:Int):Int{
-   return ContextCompat.getColor(this,color)
+fun Context.compatColor(color: Int): Int {
+    return ContextCompat.getColor(this, color)
+}
+
+/**
+ * 添加圆角阴影
+ */
+fun IQMUILayout.radiusAndShadow(
+    context: Context,
+    radius: Float? = null,
+    elevation: Int? = null,
+    alpha: Float? = null,
+    shadowColor: Int? = null
+) {
+    setRadiusAndShadow(
+        context.dp2px(if (radius.isNull()) 10f else radius!!),
+        if (elevation.isNull()) context.dp2px(5f) else elevation!!,
+        if (alpha.isNull()) 0.25f else alpha!!
+    )
+    shadowColor?.let { this.shadowColor = it }
+}
+
+/**
+ * 去掉圆角阴影
+ */
+fun IQMUILayout.hideShadow(
+    context: Context
+) {
+    shadowColor = context.compatColor(android.R.color.transparent)
+    shadowElevation = 0
 }
 

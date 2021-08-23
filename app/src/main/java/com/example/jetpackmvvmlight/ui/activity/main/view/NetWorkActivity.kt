@@ -13,7 +13,7 @@ import com.example.jetpackmvvmlight.ui.adapter.UserAdapter
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 
-class NetWorkActivity : BaseActivity(R.layout.activity_network), OnRefreshLoadMoreListener {
+class NetWorkActivity : BaseActivity(), OnRefreshLoadMoreListener {
 
     private val viewBind by viewBinding(ActivityNetworkBinding::inflate)
     private val viewModel by viewModels<NetWorkViewModel>()
