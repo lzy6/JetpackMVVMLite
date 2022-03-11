@@ -65,7 +65,7 @@
             android:layout_marginRight="15dp"
             android:layout_marginBottom="15dp"
             android:lineSpacingExtra="3dp"
-            android:text="这是一个轻量级的框架"
+            android:text="一个轻量级的JetpackMVVMLite,Kotlin+协程+LiveData+Flow"
             android:textIsSelectable="true" />
 
     </androidx.core.widget.NestedScrollView>

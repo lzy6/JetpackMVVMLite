@@ -34,4 +34,5 @@ interface APPService {
     @FormUrlEncoded
     @POST(".../pageEntity")
     suspend fun cacheEntity(): BaseResponse<ArrayList<CacheEntity>>
+
 }

@@ -1,5 +1,6 @@
 package com.example.commonlib.base
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.commonlib.apiExceptionCode
@@ -8,7 +9,12 @@ import com.example.commonlib.app.Constant
 import com.example.commonlib.entity.Page
 import com.example.commonlib.errorToast
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.launch
 
 open class BaseViewModel : ViewModel() {

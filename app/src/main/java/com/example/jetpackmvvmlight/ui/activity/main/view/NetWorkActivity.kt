@@ -5,7 +5,6 @@ import com.example.commonlib.*
 import com.example.commonlib.base.BaseActivity
 import com.example.commonlib.entity.Page
 import com.example.commonlib.entity.State
-import com.example.jetpackmvvmlight.R
 import com.example.jetpackmvvmlight.databinding.ActivityNetworkBinding
 import com.example.jetpackmvvmlight.entity.PageUser
 import com.example.jetpackmvvmlight.ui.activity.main.viewmodel.NetWorkViewModel
@@ -51,6 +50,7 @@ class NetWorkActivity : BaseActivity(), OnRefreshLoadMoreListener {
              * 缓存方式回调
              */
             observe(singEntityLiveData) {}.toState(::dialogState)
+
         }
     }
 

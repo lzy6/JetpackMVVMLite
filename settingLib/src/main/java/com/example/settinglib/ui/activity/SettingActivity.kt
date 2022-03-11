@@ -25,16 +25,16 @@ class SettingActivity : BaseActivity() {
     }
 
     private fun initClick() {
-//        viewBind.toolbar.setNavigationOnClickListener {
-//            onBackPressed()
-//        }
+        viewBind.toolbar.setNavigationOnClickListener {
+            onBackPressed()
+        }
     }
 
     /**
      * 初始化
      */
     private fun init() {
-//        setSupportActionBar(viewBind.toolbar)
+        setSupportActionBar(viewBind.toolbar)
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
         }

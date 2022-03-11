@@ -1,7 +1,6 @@
 package com.example.jetpackmvvmlight.ui.activity.main.viewmodel
 
 import com.example.commonlib.app.Constant
-import com.example.commonlib.base.BaseViewModel
 import com.example.commonlib.base.CacheManager
 import com.example.commonlib.base.StateLiveData
 import com.example.commonlib.entity.Page
