@@ -14,6 +14,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
@@ -23,9 +24,9 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.example.commonlib.entity.Page
 import com.example.commonlib.utils.HtmlUtil
+import com.example.commonlib.widget.qmui.layout.IQMUILayout
+import com.example.commonlib.widget.qmui.util.QMUIStatusBarHelper
 import com.fondesa.recyclerviewdivider.dividerBuilder
-import com.lltt.qmuilibrary.layout.IQMUILayout
-import com.lltt.qmuilibrary.util.QMUIStatusBarHelper
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -421,5 +422,9 @@ fun IQMUILayout.hideShadow(
 ) {
     shadowColor = context.compatColor(android.R.color.transparent)
     shadowElevation = 0
+}
+
+fun wrapLayoutParams(): LinearLayout.LayoutParams {
+    return LinearLayout.LayoutParams(Int.MIN_VALUE, Int.MIN_VALUE)
 }
 

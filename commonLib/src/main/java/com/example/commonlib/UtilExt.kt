@@ -3,6 +3,7 @@ package com.example.commonlib
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
@@ -75,8 +76,14 @@ fun <T, VB : ViewBinding> BaseQuickAdapter<T, BindingViewHolder<VB>>.setPageData
 /**
  * drawable设置资源
  */
-fun Context.contextDrawable(id: Int): Drawable =
+fun Context.drawable(id: Int): Drawable =
     ContextCompat.getDrawable(this, id)!!
+
+/**
+ * 设置color选择器
+ */
+fun Context.colorStateList(id: Int): ColorStateList =
+    ContextCompat.getColorStateList(this, id)!!
 
 
 /**

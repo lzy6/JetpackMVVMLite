@@ -11,8 +11,8 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.example.commonlib.*
 import com.example.commonlib.app.AppManager
 import com.example.commonlib.entity.State
-import com.lltt.qmuilibrary.dialog.QMUITipDialog
-import com.lltt.qmuilibrary.util.QMUIStatusBarHelper
+import com.example.commonlib.widget.qmui.dialog.QMUITipDialog
+import com.example.commonlib.widget.qmui.util.QMUIStatusBarHelper
 
 abstract class BaseActivity : AppCompatActivity() {
 

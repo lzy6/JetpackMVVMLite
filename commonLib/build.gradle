@@ -114,12 +114,6 @@ dependencies {
     api 'de.hdodenhof:circleimageview:3.1.0'
     api 'com.jakewharton:disklrucache:2.0.2'
 
-    /**
-     * 引入model
-     * @param qmuilibrary QMUI-UI
-     */
-    api project(':qmui')
-
     implementation 'com.alibaba:arouter-api:1.4.1'
     kapt 'com.alibaba:arouter-compiler:1.2.2'
 }

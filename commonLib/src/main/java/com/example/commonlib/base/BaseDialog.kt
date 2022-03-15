@@ -8,7 +8,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import com.example.commonlib.R
-import com.lltt.qmuilibrary.util.QMUIDisplayHelper
+import com.example.commonlib.widget.qmui.util.QMUIDisplayHelper
 
 
 abstract class BaseDialog : Dialog {

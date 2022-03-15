@@ -104,6 +104,10 @@ class MainActivity : BaseActivity(),
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_announcement -> startKtxActivity<AnnouncementActivity>()
+            R.id.nav_network_request -> startKtxActivity<NetWorkActivity>()
+            R.id.nav_flow_network_request -> startKtxActivity<NetWorkFlowActivity>()
+            R.id.nav_radius_layout -> startKtxActivity<RadiusLayoutActivity>()
+            R.id.nav_tab_viewpager -> startKtxActivity<TabViewPager2Activity>()
             R.id.nav_settings -> ARouter.getInstance().build(RoutePath.SettingActivity)
                 .navigation()
         }

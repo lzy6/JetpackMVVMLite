@@ -30,9 +30,6 @@ class SettingActivity : BaseActivity() {
         }
     }
 
-    /**
-     * 初始化
-     */
     private fun init() {
         setSupportActionBar(viewBind.toolbar)
         supportActionBar?.apply {

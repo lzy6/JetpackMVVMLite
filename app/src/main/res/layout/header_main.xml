@@ -13,12 +13,12 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginLeft="20dp"
-        android:src="@mipmap/ic_launcher_round" />
+        android:src="@mipmap/ic_launcher" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="20dp"
-        android:background="@color/gray_a9" />
+        android:background="@color/gray_A9" />
 
 </LinearLayout>

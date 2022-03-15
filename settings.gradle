@@ -1,5 +1,4 @@
 include ':commonLib'
 include ':settingLib'
-include ':qmui'
 include ':app'
-rootProject.name = "JetPackMVVMLight"
+rootProject.name = "JetpackMVVMLite"

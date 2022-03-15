@@ -6,6 +6,24 @@
         android:icon="@mipmap/ic_announcement"
         android:title="公告" />
     <item
+        android:id="@+id/nav_network_request"
+        android:icon="@mipmap/ic_announcement"
+        android:title="协程网络请求" />
+    <item
+        android:id="@+id/nav_flow_network_request"
+        android:icon="@mipmap/ic_announcement"
+        android:title="协程+Flow网络请求" />
+
+    <item
+        android:id="@+id/nav_radius_layout"
+        android:icon="@mipmap/ic_announcement"
+        android:title="圆角按钮/布局" />
+
+    <item
+        android:id="@+id/nav_tab_viewpager"
+        android:icon="@mipmap/ic_announcement"
+        android:title="Tab+ViewPager示例" />
+    <item
         android:id="@+id/nav_settings"
         android:icon="@mipmap/ic_setting"
         android:title="设置" />

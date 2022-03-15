@@ -4,8 +4,6 @@ import android.os.Bundle
 import com.example.commonlib.base.BaseActivity
 import com.example.commonlib.startKtxActivity
 import com.example.commonlib.viewBinding
-import com.example.jetpackmvvmlight.R
-import com.example.jetpackmvvmlight.databinding.ActivityMainBinding
 import com.example.jetpackmvvmlight.databinding.ActivitySplashBinding
 
 class SplashActivity : BaseActivity() {

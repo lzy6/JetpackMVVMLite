@@ -7,5 +7,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="gray_a9">#A9A9A9</color>
+    <color name="gray_A9">#A9A9A9</color>
+    <color name="orange_FF8C00">#FF8C00</color>
 </resources>

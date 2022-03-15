@@ -12,8 +12,23 @@ class NetWorkFlowActivity : BaseActivity() {
     private val viewModel by viewModels<NetWorkFlowViewModel>()
 
     override fun initData() {
-        viewBind
+        init()
+        initClick()
     }
+
+    private fun initClick() {
+        viewBind.toolbar.setNavigationOnClickListener {
+            onBackPressed()
+        }
+    }
+
+    private fun init() {
+        setSupportActionBar(viewBind.toolbar)
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+        }
+    }
+
 
     override fun request() {
         viewModel.run {

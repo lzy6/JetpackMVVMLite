@@ -21,6 +21,7 @@ class NetWorkActivity : BaseActivity(), OnRefreshLoadMoreListener {
 
     override fun initData() {
         init()
+        initClick()
         initListener()
     }
 
@@ -28,6 +29,11 @@ class NetWorkActivity : BaseActivity(), OnRefreshLoadMoreListener {
         viewBind.refresh.setOnRefreshLoadMoreListener(this)
     }
 
+    private fun initClick() {
+        viewBind.toolbar.setNavigationOnClickListener {
+            onBackPressed()
+        }
+    }
 
     /**
      * 数据回传
@@ -55,7 +61,10 @@ class NetWorkActivity : BaseActivity(), OnRefreshLoadMoreListener {
     }
 
     private fun init() {
-        initNoViewStatusBar(true)
+        setSupportActionBar(viewBind.toolbar)
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+        }
     }
 
     /**

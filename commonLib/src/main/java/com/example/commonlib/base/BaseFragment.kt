@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.commonlib.apiState
 import com.example.commonlib.entity.State
-import com.lltt.qmuilibrary.dialog.QMUITipDialog
-import com.lltt.qmuilibrary.util.QMUIStatusBarHelper
+import com.example.commonlib.widget.qmui.dialog.QMUITipDialog
+import com.example.commonlib.widget.qmui.util.QMUIStatusBarHelper
 
 abstract class BaseFragment : Fragment() {
 

@@ -5,4 +5,7 @@
     <color name="colorAccent">#1C2838</color>
 
     <color name="white">#ffffff</color>
+    <color name="qmui_config_color_separator">#DEE0E2</color>
+
+    <color name="bg_black_c0_00">#C0000000</color>
 </resources>
