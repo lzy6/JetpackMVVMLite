@@ -1,6 +1,7 @@
 package com.example.jetpackmvvmlight.ui.adapter
 
 import android.view.ViewGroup
+import coil.load
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.example.commonlib.BindingViewHolder
 import com.example.commonlib.newBindingViewHolder

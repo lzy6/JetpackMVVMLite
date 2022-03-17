@@ -97,7 +97,7 @@ dependencies {
      * @param circleimageview 圆形图片
      * @param disklrucache 磁盘缓存
      */
-    api 'com.github.bumptech.glide:glide:4.11.0'
+    api "io.coil-kt:coil:1.4.0"
     api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
     kapt "org.permissionsdispatcher:permissionsdispatcher-processor:4.7.0"
     api "org.permissionsdispatcher:permissionsdispatcher-ktx:1.0.0-alpha2"

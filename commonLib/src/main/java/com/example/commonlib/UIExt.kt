@@ -21,7 +21,6 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
-import com.bumptech.glide.Glide
 import com.example.commonlib.entity.Page
 import com.example.commonlib.utils.HtmlUtil
 import com.example.commonlib.widget.qmui.layout.IQMUILayout
@@ -175,32 +174,32 @@ fun getString(context: Context, stringID: Int, vararg args: Any): String {
  * ImageView
  * 加载网络图片
  */
-fun ImageView.loadImage(url: String) {
-    loadImage(context, url, R.color.colorAccent)
-}
+//fun ImageView.loadImage(url: String) {
+//    loadImage(context, url, R.color.colorAccent)
+//}
 
 /**
  * ImageView
  * 加载本地图片
  */
-fun ImageView.loadImage(url: Int) {
-    Glide.with(context)
-        .load(url)
-        .into(this)
-}
+//fun ImageView.loadImage(url: Int) {
+//    Glide.with(context)
+//        .load(url)
+//        .into(this)
+//}
 
 /**
  * ImageView
  * 加载图片自定义加载图
  */
-fun ImageView.loadImage(context: Context, url: String?, placeholder: Int) {
-    url?.let {
-        Glide.with(context)
-            .load(it)
-            .placeholder(placeholder)
-            .into(this)
-    }
-}
+//fun ImageView.loadImage(context: Context, url: String?, placeholder: Int) {
+//    url?.let {
+//        Glide.with(context)
+//            .load(it)
+//            .placeholder(placeholder)
+//            .into(this)
+//    }
+//}
 
 /**
  * dp转px

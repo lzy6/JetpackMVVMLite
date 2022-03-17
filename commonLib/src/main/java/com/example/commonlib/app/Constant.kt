@@ -21,4 +21,8 @@ object Constant{
      * 缓存key
      */
     const val CACHE="cache"
+
+    const val NIGHT_MODE="night_mode";
+    const val NO_NIGHT_MODE=0//白天模式
+    const val IS_NIGHT_MODE=1//夜间模式
 }

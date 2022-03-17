@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory android:title="基本设置">
+        <SwitchPreference
+            android:key="switch_pre_night_key"
+            android:title="夜间模式" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="关于">
+        <PreferenceScreen
+            android:summary="https://juejin.cn/post/6910906438487539719"
+            android:title="博客地址">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://juejin.cn/post/6910906438487539719" />
+        </PreferenceScreen>
+        <PreferenceScreen
+            android:summary="https://github.com/lzy6/JetpackMVVMLite"
+            android:title="git仓库网址">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://github.com/lzy6/JetpackMVVMLite" />
+        </PreferenceScreen>
+        <PreferenceScreen
+            android:summary="v1.0.3"
+            android:title="版本号" />
+    </PreferenceCategory>
+</PreferenceScreen>

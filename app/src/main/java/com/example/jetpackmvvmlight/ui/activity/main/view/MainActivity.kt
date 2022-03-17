@@ -1,15 +1,12 @@
 package com.example.jetpackmvvmlight.ui.activity.main.view
 
 import android.content.Intent
-import android.util.Log
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import androidx.core.view.GravityCompat
-import androidx.lifecycle.lifecycleScope
 import com.alibaba.android.arouter.launcher.ARouter
 import com.example.commonlib.*
 import com.example.commonlib.app.RoutePath
@@ -18,14 +15,6 @@ import com.example.jetpackmvvmlight.R
 import com.example.jetpackmvvmlight.databinding.ActivityMainBinding
 import com.example.jetpackmvvmlight.ui.adapter.MainAdapter
 import com.google.android.material.navigation.NavigationView
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.InternalCoroutinesApi
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.FlowCollector
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.launch
 
 class MainActivity : BaseActivity(),
     NavigationView.OnNavigationItemSelectedListener {
@@ -42,6 +31,7 @@ class MainActivity : BaseActivity(),
 
     override fun request() {
     }
+
 
     /**
      * 初始化点击事件

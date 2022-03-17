@@ -1,0 +1,11 @@
+<resources>
+    
+    <array name="entries_list_preference">
+        <item>1</item>
+        <item>2</item>
+    </array>
+    <array name="entryvalues_list_preference">
+        <item>1</item>
+        <item>2</item>
+    </array>
+</resources>
