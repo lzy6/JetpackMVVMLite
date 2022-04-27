@@ -25,4 +25,7 @@ object Constant{
     const val NIGHT_MODE="night_mode";
     const val NO_NIGHT_MODE=0//白天模式
     const val IS_NIGHT_MODE=1//夜间模式
+
+    const val URL="url"
+    const val FRAME_URL="https://github.com/lzy6/JetpackMVVMLite"
 }

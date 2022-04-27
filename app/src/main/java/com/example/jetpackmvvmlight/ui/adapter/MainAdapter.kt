@@ -6,6 +6,7 @@ import com.example.commonlib.*
 import com.example.jetpackmvvmlight.databinding.ItemMainBinding
 import com.example.jetpackmvvmlight.entity.Main
 import com.example.jetpackmvvmlight.ui.activity.main.view.BriefIntroductionActivity
+import com.example.jetpackmvvmlight.ui.activity.main.view.ComponentsActivity
 
 class MainAdapter : BaseQuickAdapter<Main, BindingViewHolder<ItemMainBinding>>(0) {
 
@@ -23,7 +24,7 @@ class MainAdapter : BaseQuickAdapter<Main, BindingViewHolder<ItemMainBinding>>(0
     private fun toActivity(position: Int) {
         when (position) {
             0 -> context.startKtxActivity<BriefIntroductionActivity>()
-            1 -> toast("近日更新")
+            1 -> context.startKtxActivity<ComponentsActivity>()
             2 -> toast("近日更新")
             3 -> toast("近日更新")
         }
