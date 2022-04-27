@@ -11,7 +11,7 @@
 
             <corners android:radius="4dp" />
 
-            <solid android:color="@color/colorAccent" />
+            <solid android:color="@color/purple_700" />
 
         </shape>
     </item>

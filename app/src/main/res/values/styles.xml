@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="Theme.JetPackMVVMLight" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
-
-    <style name="SplashTheme" parent="Theme.JetPackMVVMLight">
+    <style name="SplashTheme" parent="Theme.MyApplication">
         <item name="android:windowBackground">@drawable/bg_slpash</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowIsTranslucent">false</item>
@@ -43,5 +36,9 @@
         <item name="cornerFamilyBottomRight">rounded</item>
         <item name="cornerSizeTopLeft">25dp</item>
         <item name="cornerSizeBottomRight">25dp</item>
+    </style>
+
+    <style name="ToolbarColoredBackArrow" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:textColorSecondary">#000000</item>
     </style>
 </resources>

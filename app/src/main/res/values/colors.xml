@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#1C2838</color>
-    <color name="colorPrimaryDark">#1C2838</color>
-    <color name="colorAccent">#1C2838</color>
+    <!--    背景颜色-->
+    <color name="background">#FAFAFA</color>
+    <!--    标题颜色-->
+    <color name="color_toolbar">#FFFFFFFF</color>
+    <!--    卡片颜色-->
+    <color name="color_card">#FFFFFFFF</color>
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
     <color name="gray_A9">#A9A9A9</color>
+    <color name="text_h1">#FF000000</color>
+    <color name="text_h2">#212121</color>
     <color name="orange_FF8C00">#FF8C00</color>
 </resources>

@@ -1,13 +1,13 @@
 package com.example.jetpackmvvmlight.ui.activity.main.view
 
 import com.example.commonlib.base.BaseActivity
+import com.example.commonlib.statusColor
 import com.example.commonlib.viewBinding
-import com.example.jetpackmvvmlight.R
-import com.example.jetpackmvvmlight.databinding.ActivityAnnouncementBinding
+import com.example.jetpackmvvmlight.databinding.ActivityBriefIntroductionBinding
 
-class AnnouncementActivity : BaseActivity() {
+class BriefIntroductionActivity : BaseActivity() {
 
-    private val viewBind by viewBinding(ActivityAnnouncementBinding::inflate)
+    private val viewBind by viewBinding(ActivityBriefIntroductionBinding::inflate)
 
     override fun initData() {
         init()
@@ -18,23 +18,17 @@ class AnnouncementActivity : BaseActivity() {
 
     }
 
-    /**
-     * 初始化点击事件
-     */
     private fun initClick() {
         viewBind.toolbar.setNavigationOnClickListener {
             onBackPressed()
         }
     }
 
-    /**
-     * 初始化
-     */
     private fun init() {
+        statusColor(this, true)
         setSupportActionBar(viewBind.toolbar)
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
         }
     }
-
 }

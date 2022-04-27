@@ -374,6 +374,7 @@ fun statusColor(activity: Activity, isLightMode: Boolean) {
     }
 }
 
+
 /**
  * toolbar-padding
  */

@@ -79,36 +79,6 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     /**
-     * 设置状态栏
-     * @param isLightMode true-黑色，false-白色
-     */
-    protected fun initStatusBar(view: View, isLightMode: Boolean) {
-        QMUIStatusBarHelper.translucent(this)
-        view.toolbarPadding()
-        initNoViewStatusBar(isLightMode)
-    }
-
-    /**
-     * 设置状态栏
-     * @param isLightMode true-黑色，false-白色
-     */
-    protected fun initStatusBar(view: View) {
-        QMUIStatusBarHelper.translucent(this)
-        view.toolbarPadding()
-    }
-
-
-    /**
-     * 没有view的状态栏
-     * @param isLightMode true-黑色，false-白色
-     */
-    protected fun initNoViewStatusBar(isLightMode: Boolean) {
-        QMUIStatusBarHelper.translucent(this)
-        statusColor(this, isLightMode)
-    }
-
-
-    /**
      * dialog状态
      */
     fun dialogState(state: State) {

@@ -45,9 +45,9 @@
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:text="边框圆角按钮"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/purple_700"
         app:backgroundTint="@color/white"
-        app:strokeColor="@color/colorPrimary"
+        app:strokeColor="@color/purple_700"
         app:strokeWidth="1dp" />
 
     <com.google.android.material.button.MaterialButton
@@ -76,7 +76,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginTop="5dp"
-            android:background="@color/colorPrimary"
+            android:background="@color/purple_700"
             app:shapeAppearanceOverlay="@style/RoundStyle" />
     </LinearLayout>
 
@@ -96,7 +96,7 @@
             android:layout_height="40dp"
             android:layout_marginTop="5dp"
             android:padding="1dp"
-            android:background="@color/colorPrimary"
+            android:background="@color/purple_700"
             app:shapeAppearanceOverlay="@style/RoundStyle"
             app:strokeColor="@color/orange_FF8C00"
             app:strokeWidth="1dp" />
@@ -120,7 +120,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_margin="10dp"
-        app:qmui_backgroundColor="@color/colorPrimary">
+        app:qmui_backgroundColor="@color/purple_700">
 
         <TextView
             android:layout_width="match_parent"
