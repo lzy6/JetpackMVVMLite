@@ -25,8 +25,8 @@ android {
         applicationId "com.example.jetpackmvvmlight"
         minSdkVersion 21
         targetSdkVersion 32
-        versionCode 1
-        versionName "1.0"
+        versionCode 100
+        versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -39,9 +39,23 @@ android {
         enabled = true
     }
 
+    signingConfigs {
+        release {
+            keyAlias 'key0'
+            keyPassword '123456'
+            storePassword '123456'
+            storeFile file('release.jsk')
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
+            zipAlignEnabled true
+            signingConfig = signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
