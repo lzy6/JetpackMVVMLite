@@ -2,15 +2,16 @@ package com.example.jetpackmvvmlight.ui.activity.main.view
 
 import com.example.commonlib.addDivider
 import com.example.commonlib.base.BaseActivity
+import com.example.commonlib.startKtxActivity
 import com.example.commonlib.statusColor
 import com.example.commonlib.viewBinding
-import com.example.jetpackmvvmlight.dataBriefIntroduction
-import com.example.jetpackmvvmlight.databinding.ActivityBriefIntroductionBinding
+import com.example.jetpackmvvmlight.dataCodeSegment
+import com.example.jetpackmvvmlight.databinding.ActivityCodeSegmentBinding
 import com.example.jetpackmvvmlight.ui.adapter.DescribeAdapter
 
-class BriefIntroductionActivity : BaseActivity() {
+class CodeSegmentActivity : BaseActivity() {
 
-    private val viewBind by viewBinding(ActivityBriefIntroductionBinding::inflate)
+    private val viewBind by viewBinding(ActivityCodeSegmentBinding::inflate)
     private val adapter by lazy { DescribeAdapter() }
 
     override fun initData() {
@@ -44,6 +45,7 @@ class BriefIntroductionActivity : BaseActivity() {
             showLastDivider = false,
             showSideDividers = false
         )
-        adapter.setNewInstance(dataBriefIntroduction())
+        adapter.setNewInstance(dataCodeSegment())
     }
+
 }

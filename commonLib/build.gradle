@@ -113,6 +113,7 @@ dependencies {
     api 'com.scwang.smart:refresh-footer-classics:2.0.1'
     api 'de.hdodenhof:circleimageview:3.1.0'
     api 'com.jakewharton:disklrucache:2.0.2'
+    api 'io.noties.markwon:core:4.3.1'
 
     implementation 'com.alibaba:arouter-api:1.4.1'
     kapt 'com.alibaba:arouter-compiler:1.2.2'

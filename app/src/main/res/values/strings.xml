@@ -19,4 +19,86 @@
     · jetpack组件减少代码不一致，减少开发者的学习成本\n
     · 请求API代码简约，不需要关注绑定生命周期与切换线程</string>
 
+    <string name="why_use_viewbinding">findViewById->Butterknife->DataBinding->Kotlin synthetic->ViewBinding\n
+        刚开始做安卓时用了很短时间的findViewById，然后就用上了Butterknife,换成DataBinding的原因是Butterknife要在activity声明控件并注入，需要写大量代码。
+    DataBinding没用多久，虽然它支持双向绑定，但是入侵了xml，复杂业务逻辑下xml会变得很复杂，维护成本，其他开发学习成本都很大。后来用了Kotlin synthetic，Kotlin自带，不需要集成
+    三方库，有个问题是如果xml声明ID没注意，写错或漏了，Kotlin synthetic报的错会很难排查，后来是因为google不推荐使用这个并且要废弃了，就选择了ViewBinding，它相比DataBinding更
+    轻量，不需要写过多的声明代码，只需要在activity/fragment中声明出对应布局的ViewBinding就好了</string>
+
+    <string name="why_use_load_image">ImageLoader->Glide->coil\n
+    第一个是ImageLoader，换掉它是因为它在使用上很麻烦，不支持生命周期，什么都需要开发者去处理。用了Glide给我的第一个感觉是原来图片加载还可以这么方便，Glide用的最久，
+    近期用了coil，因为它比较轻量，方法数几乎是Glide的一半，完全由kotlin编写有更好的支持，用Glide+kotlin的拓展方法展示形式与coil一样，所以最后选择了coil</string>
+
+    <string name="why_use_event">RxBus->EventBus->LiveEventBus\n
+    用RxJava时第一个想到RxBus，风格统一，并且依赖Rxjava实现RxBus只需要一个文件。后来用了EventBus,也是想有换掉Rxjava做准备，
+        后来写自己的框架，用上了LiveData，基于LiveData实现的LiveEventBus，支持生命周期管理，不需要开发者关注注册/注销</string>
+
+    <string name="code_event">"```\n"
+                "//发送消息\n"
+                "LiveEventBus.get(Constant.EVENT).post(\"\")\n"
+                "\n"
+                "//接受消息\n"
+                "LiveEventBus.get(Constant.EVENT)\n"
+                "    .observe(this, Observer {     \n"
+                "     \n"
+                "})\n"
+                "```"</string>
+
+    <string name="code_net_request">"```\n"
+                "val singLD = StateLiveData&lt;T&gt;()\n"
+                "fun sing() = launchUI(\n"
+                "        response = { api.singApi().data!! },\n"
+                "        liveData = singLD\n"
+                "    )\n"
+                "```"</string>
+
+    <string name="code_api_result">"```\n"
+                "viewModel.run {\n"
+                "      //分页回调\n"
+                "      observe(pageLD, ::setData).toState(::pageState)\n"
+                "      //单个实体回调\n"
+                "      observe(singLD) {}.toState(::dialogState)\n"
+                "  }\n"
+                "```"</string>
+
+    <string name="code_activity_viewbinding">"```\n"
+        "private val viewBind by viewBinding(ActivityMainBinding::inflate)\n"
+        "```"</string>
+    <string name="code_fragment_viewbinding">"```\n" 
+        "private val viewBind by viewBinding(FragmentTestBinding::bind)\n" 
+        "```"</string>
+    
+    <string name="code_custom_method_override_method">"```\n"
+        "viewpager2.setOnPageChangeListener { \n"
+        "}\n"
+        "\n"
+        "editText.setOnTextChanged { s, start, before, count ->\n"
+        "}\n"
+        "```"</string>
+
+    <string name="code_custom_click">"```\n"
+        "view.onClick{}\n"
+        "```"</string>
+    <string name="code_custom_del_line">"```\n"
+        "textView.centerLine()\n"
+        "```"</string>
+    <string name="code_custom_skeleton">"```\n"
+        "recyclerView.initSkeletonRecyclerView(adapter)\n"
+        "```"</string>
+    <string name="code_custom_download">"```\n"
+        "fileDownloader(context, downloadUrl,\n"
+        "    completed = {},\n"
+        "    pending = {},\n"
+        "    progress = { soFarBytes, totalBytes ->\n"
+        "\t\t\n"
+        "    })\n"
+        "```"</string>
+    <string name="code_custom_protocol">"```\n"
+        "textView.protocol(\"...《用户协议》和《隐私政策》...\") {\n"
+        "            when(it){\n"
+        "                0 -> startKtxActivity&lt;WebViewActivity&gt;(Constant.USER_PROTOCOL)\n"
+        "                1 -> startKtxActivity&lt;WebViewActivity&gt;(Constant.PRIVACY_PROTOCOL)\n"
+        "            }\n"
+        "        }\n"
+        "```"</string>
 </resources>

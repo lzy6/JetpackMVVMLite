@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     android:orientation="vertical"
-    tools:context=".ui.activity.main.view.BriefIntroductionActivity">
+    tools:context=".ui.activity.main.view.CodeSegmentActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -30,6 +30,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:itemCount="2"
+        tools:itemCount="3"
         tools:listitem="@layout/item_describe" />
 </LinearLayout>

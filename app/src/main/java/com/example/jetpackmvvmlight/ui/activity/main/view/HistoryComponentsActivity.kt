@@ -4,13 +4,13 @@ import com.example.commonlib.addDivider
 import com.example.commonlib.base.BaseActivity
 import com.example.commonlib.statusColor
 import com.example.commonlib.viewBinding
-import com.example.jetpackmvvmlight.dataBriefIntroduction
-import com.example.jetpackmvvmlight.databinding.ActivityBriefIntroductionBinding
+import com.example.jetpackmvvmlight.dataHistoryComponents
+import com.example.jetpackmvvmlight.databinding.ActivityHistoryComponentsBinding
 import com.example.jetpackmvvmlight.ui.adapter.DescribeAdapter
 
-class BriefIntroductionActivity : BaseActivity() {
+class HistoryComponentsActivity : BaseActivity() {
 
-    private val viewBind by viewBinding(ActivityBriefIntroductionBinding::inflate)
+    private val viewBind by viewBinding(ActivityHistoryComponentsBinding::inflate)
     private val adapter by lazy { DescribeAdapter() }
 
     override fun initData() {
@@ -37,13 +37,13 @@ class BriefIntroductionActivity : BaseActivity() {
         }
     }
 
-    private fun initRv() {
-        viewBind.rvList.adapter = adapter
+    private fun initRv(){
+        viewBind.rvList.adapter=adapter
         viewBind.rvList.addDivider(5f,
             showFirstDivider = false,
             showLastDivider = false,
             showSideDividers = false
         )
-        adapter.setNewInstance(dataBriefIntroduction())
+        adapter.setNewInstance(dataHistoryComponents())
     }
 }

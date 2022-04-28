@@ -78,6 +78,18 @@
             android:label=""
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".ui.activity.main.view.HistoryComponentsActivity"
+            android:exported="true"
+            android:label="历史组件"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".ui.activity.main.view.CodeSegmentActivity"
+            android:exported="true"
+            android:label="代码片段"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
     </application>
 
 </manifest>
